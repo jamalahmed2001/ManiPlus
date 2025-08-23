@@ -1,9 +1,13 @@
+/**
+ * @typedef {'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never'} Changefreq
+ */
+
 /** @type {import('next-sitemap').IConfig} */
 export default {
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://thebeatingedge.com',
   generateRobotsTxt: true,
   sitemapSize: 7000,
-  changefreq: 'daily',
+  changefreq: /** @type {Changefreq} */ ('daily'),
   priority: 0.7,
   exclude: [
     '/server-sitemap.xml',
@@ -24,13 +28,13 @@ export default {
     if (path.includes('/episodes/')) {
       return {
         loc: path,
-        changefreq: 'weekly',
+        changefreq: /** @type {Changefreq} */ ('weekly'),
         priority: 0.9, // High priority for episodes
         lastmod: new Date().toISOString(),
         alternateRefs: config.alternateRefs ?? [],
         // Add podcast-specific metadata
         images: [{
-          loc: `${config.siteUrl}/mani+logo.png`,
+          loc: new URL(`${config.siteUrl}/mani+logo.png`),
           title: 'The Beating Edge with Mani+ Podcast Logo'
         }]
       }
@@ -40,7 +44,7 @@ export default {
     if (path.includes('/story') || path.includes('/about')) {
       return {
         loc: path,
-        changefreq: 'monthly',
+        changefreq: /** @type {Changefreq} */ ('monthly'),
         priority: 0.8,
         lastmod: new Date().toISOString(),
         alternateRefs: config.alternateRefs ?? []
@@ -62,14 +66,14 @@ export default {
     // Add dynamic paths that might not be statically discoverable
     result.push({
       loc: '/episodes',
-      changefreq: 'weekly',
+      changefreq: /** @type {Changefreq} */ ('weekly'),
       priority: 0.8,
       lastmod: new Date().toISOString()
     })
 
     result.push({
       loc: '/subscribe',
-      changefreq: 'monthly',
+      changefreq: /** @type {Changefreq} */ ('monthly'),
       priority: 0.7,
       lastmod: new Date().toISOString()
     })
