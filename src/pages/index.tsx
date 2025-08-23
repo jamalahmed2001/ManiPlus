@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Link from "next/link";
+import Image from "next/image";
 import { Header, Section, Card, Button, EpisodeCard, Newsletter, PodcastStructuredData } from '@/components';
 
 export default function Home() {
@@ -98,7 +99,7 @@ export default function Home() {
     <>
       <Head>
         <title>The Beating Edge with Mani+ | Transformative Healthcare Stories & Medical Insights</title>
-        <meta name="description" content="Join Mani+, a heart transplant recipient and dialysis patient, for powerful conversations with doctors, researchers, and fellow patients. Discover breakthrough treatments, inspiring recovery stories, and the human side of modern medicine." />
+        <meta name="description" content="When hearts whisper, we listen. Intimate conversations from hospital rooms, dialysis chairs, and the quiet moments when everything changes. The stories that live between the medical charts." />
         <meta name="keywords" content="heart transplant podcast, dialysis stories, medical podcast, healthcare stories, patient advocacy, transplant recipient, chronic illness, medical innovation, healthcare professionals, patient journey, organ transplant, kidney failure, medical research, health podcast" />
         <meta name="author" content="Mani+" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -107,14 +108,14 @@ export default function Home() {
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://thebeatingedge.com/" />
         <meta property="og:title" content="The Beating Edge with Mani+ | Healthcare Stories That Transform Lives" />
-        <meta property="og:description" content="Raw, honest conversations about life after heart transplant, kidney failure, and the resilience of the human spirit. Where medicine meets the human experience." />
+        <meta property="og:description" content="The conversations that happen in hospital rooms, dialysis chairs, and the quiet moments when everything changes. Where medicine meets the stories we don&apos;t always tell." />
         <meta property="og:image" content="/mani+logo.png" />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://thebeatingedge.com/" />
         <meta property="twitter:title" content="The Beating Edge with Mani+ | Healthcare Stories That Transform Lives" />
-        <meta property="twitter:description" content="Raw, honest conversations about life after heart transplant, kidney failure, and the resilience of the human spirit." />
+        <meta property="twitter:description" content="The conversations that happen in hospital rooms and the quiet moments when everything changes." />
         <meta property="twitter:image" content="/mani+logo.png" />
 
         <link rel="icon" href="/favicon.ico" />
@@ -147,20 +148,21 @@ export default function Home() {
           <div className={`relative z-10 text-center px-4 max-w-6xl mx-auto transition-all duration-2000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
             {/* Mani+ Logo */}
             <div className="mb-8 flex justify-center">
-              <img 
+              <Image 
                 src="/mani+logo.png" 
-                
+                width={320}
+                height={160}
                 alt="The Beating Edge with Mani+ Logo" 
                 className="w-80 h-auto drop-shadow-2xl hover:scale-105 transition-transform duration-500"
               />
             </div>
 
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-light mb-6 leading-tight">
-              <span className="text-white drop-shadow-xl">Where Medicine Meets the Human Spirit</span>
+              <span className="text-white drop-shadow-xl">When Hearts Whisper, We Listen</span>
             </h1>
 
             <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-8 leading-relaxed">
-              Raw, honest conversations about life after heart transplant, kidney failure, and the extraordinary resilience of the human spirit
+              The conversations that happen in hospital rooms, dialysis chairs, and the quiet moments when everything changes. This is where medicine meets the stories we don&apos;t always tell.
             </p>
 
             {/* Stats */}
@@ -190,7 +192,7 @@ export default function Home() {
               </Button>
               <Link href="/story">
                 <Button variant="outline" size="lg" icon="📖">
-                  Read Mani+'s Story
+                  Read Mani&apos;s Story
                 </Button>
               </Link>
             </div>
@@ -216,18 +218,18 @@ export default function Home() {
                 </h2>
                 <div className="space-y-6 text-lg text-gray-300 leading-relaxed">
                   <p>
-                    Life changed forever when my heart began to fail. After receiving a life-saving heart transplant, 
-                    I thought the hardest part was behind me. Then came kidney failure and the reality of dialysis 
-                    four times a week.
+                    My heart began to fail quietly — not with drama, but with whispers I tried to ignore. 
+                    Hospital lights, beeping monitors, the night I couldn&apos;t breathe. Then came a heart 
+                    transplant, kidney failure, and dialysis four times a week.
                   </p>
                   <p>
-                    But I discovered something powerful in these challenges: every patient, every doctor, every 
-                    healthcare worker has a story that needs to be heard. Stories of resilience, innovation, 
-                    hope, and the incredible advances in modern medicine.
+                    In those dialysis chairs, during those long hours, I met people whose stories demanded 
+                    to be heard. Healthcare workers who were heroes without capes. Doctors pushing boundaries. 
+                    Patients rewriting what it means to live.
                   </p>
-                  <p className="text-red-400 font-semibold">
-                    The Beating Edge isn&#39;t just about surviving – it&#39;s about thriving and sharing the wisdom 
-                    gained along the way.
+                  <p className="text-red-400 font-semibold italic">
+                    When your heart begins to fail, so do the illusions about being invincible. But what 
+                    emerges is something more powerful — the courage to share what we&apos;ve learned in the darkness.
                   </p>
                 </div>
               </div>
@@ -259,7 +261,7 @@ export default function Home() {
               <span className="text-red-400">What We</span> <span className="text-green-400">Explore</span>
             </h2>
             <p className="text-xl text-gray-400 mb-12 max-w-3xl mx-auto">
-              Deep conversations that matter, with the people who know medicine from the inside out
+              The stories that live in hospital hallways, the wisdom found in waiting rooms, and the courage discovered when everything changes
             </p>
 
             <div className="grid md:grid-cols-3 gap-8">
@@ -267,7 +269,7 @@ export default function Home() {
                 <div className="text-center">
                   <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">🫀</div>
                   <h3 className="text-xl font-bold text-red-400 mb-3">Patient Stories</h3>
-                  <p className="text-gray-300">Real experiences from transplant recipients, chronic illness warriors, and those navigating complex medical journeys with courage and hope.</p>
+                  <p className="text-gray-300">The whispered fears, unexpected laughter, and profound moments that happen when life takes an unplanned turn. These are the voices that need to be heard.</p>
                 </div>
               </Card>
 
@@ -275,7 +277,7 @@ export default function Home() {
                 <div className="text-center">
                   <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">👨‍⚕️</div>
                   <h3 className="text-xl font-bold text-green-400 mb-3">Medical Insights</h3>
-                  <p className="text-gray-300">Leading doctors and specialists share breakthrough treatments, cutting-edge research, and revolutionary approaches to patient care.</p>
+                  <p className="text-gray-300">The doctors who stay late, the nurses who remember your name, the researchers changing tomorrow&apos;s medicine. Their dedication deserves spotlight.</p>
                 </div>
               </Card>
 
@@ -283,7 +285,7 @@ export default function Home() {
                 <div className="text-center">
                   <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">💪</div>
                   <h3 className="text-xl font-bold text-white mb-3">Thriving Beyond Limits</h3>
-                  <p className="text-gray-300">Practical wisdom for living fully with chronic conditions - from mental resilience to life strategies that actually work.</p>
+                  <p className="text-gray-300">What they don&apos;t teach you in medical school: how to find joy in small victories, strength in vulnerability, and purpose in the unexpected.</p>
                 </div>
               </Card>
             </div>
@@ -315,7 +317,8 @@ export default function Home() {
                 <span className="text-red-400">Never Miss</span> <span className="text-green-400">A Beat</span>
               </h2>
               <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-                Get notified when new episodes drop and join a community of patients, healthcare professionals, and advocates who understand the journey.
+                Join others who know that the most important conversations happen in quiet moments — 
+                when hearts learn to listen and stories find their voice.
               </p>
 
               <div className="flex flex-wrap justify-center gap-4 mb-8">
@@ -366,8 +369,8 @@ export default function Home() {
               </h3>
             </div>
             <p className="text-gray-400 mb-6 max-w-2xl mx-auto">
-              Sharing stories of resilience, medical innovation, and the extraordinary human spirit in healthcare.
-              Every heartbeat tells a story. Every story matters.
+              For the whispered fears in waiting rooms, the courage found in unexpected places, and the wisdom that emerges when hearts learn to listen.
+              Every heartbeat carries a story. Every story deserves to be heard.
             </p>
             <div className="flex justify-center space-x-6 text-gray-400 mb-6">
               <Link href="/contact" className="hover:text-red-400 transition-colors">Contact</Link>

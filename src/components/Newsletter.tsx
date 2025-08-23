@@ -31,7 +31,7 @@ export const Newsletter: React.FC<NewsletterProps> = ({ className: _className })
       
       setIsSubscribed(true);
       setEmail('');
-    } catch (_err) {
+    } catch {
       setError('Something went wrong. Please try again.');
     } finally {
       setIsLoading(false);
@@ -43,7 +43,7 @@ export const Newsletter: React.FC<NewsletterProps> = ({ className: _className })
       <Card variant="gradient" className="max-w-md mx-auto text-center">
         <div className="space-y-4">
           <div className="text-4xl">✅</div>
-          <h3 className="text-xl font-bold text-white">You're All Set!</h3>
+          <h3 className="text-xl font-bold text-white">You&apos;re All Set!</h3>
           <p className="text-gray-300">
             Thank you for subscribing! You&apos;ll be the first to know about new episodes and exclusive content.
           </p>

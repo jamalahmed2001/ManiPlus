@@ -77,7 +77,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
             </button>
          
             <Link href="/story" className="text-gray-300 hover:text-white transition-colors">
-              Mani+'s Story
+              Mani&apos;s Story
             </Link>
             <Link href="/contact" className="text-gray-300 hover:text-white transition-colors">
               Contact

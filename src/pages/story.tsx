@@ -48,12 +48,55 @@ export default function Story() {
           </div>
         </section>
 
+        {/* Part 1: The Whisper */}
+        <Section background="black">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                <span className="text-red-400">Part 1:</span> The Whisper
+              </h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-red-400 to-green-400 mx-auto"></div>
+            </div>
+
+            <div className="prose prose-lg prose-invert max-w-none">
+              <div className="text-gray-300 leading-relaxed space-y-6 text-lg">
+                <p>
+                  When my heart began to fail, it didn&apos;t announce itself with a dramatic crash. 
+                  It was quieter than that — a breath I couldn&apos;t quite catch, stairs that felt 
+                  steeper than they used to, a kind of tiredness that sleep didn&apos;t fix.
+                </p>
+                <p>
+                  The doctors called it congestive heart failure, also left side ventricle like 
+                  it was some technical glitch. But to me, it felt like my body had started 
+                  whispering a secret it had been holding for years: something&apos;s not right.
+                </p>
+                <p>
+                  At first, I ignored it. I pushed through, like I always did. I told myself I 
+                  was just getting older. Just tired. Just busy. But then came the night I 
+                  couldn&apos;t get out of bed without feeling like I was drowning in air. That was 
+                  the night my denial ran out.
+                </p>
+                <p>
+                  The hospital lights were too bright. The monitors beeped like they were keeping 
+                  time for a song I didn&apos;t know the words to. I watched nurses move around me 
+                  like I was part of a machine — a thing to stabilize. But inside, I was unraveling.
+                </p>
+                <p className="text-red-400 font-medium italic border-l-4 border-red-400 pl-6">
+                  What no one tells you is that when your heart begins to fail, so do all the 
+                  illusions you had about being invincible. The plans. The independence. The idea 
+                  that there will always be time later.
+                </p>
+              </div>
+            </div>
+          </div>
+        </Section>
+
         {/* Chapter 1: The Beginning */}
         <Section background="gradient-gray">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                <span className="text-red-400">Chapter 1:</span> When Everything Changed
+                <span className="text-red-400">Part 2:</span> The Diagnosis
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-red-400 to-green-400 mx-auto"></div>
             </div>
@@ -64,7 +107,7 @@ export default function Story() {
                   <div className="text-6xl mb-4">💔</div>
                   <h3 className="text-xl font-bold text-white mb-2">Heart Failure Diagnosis</h3>
                   <p className="text-gray-300">
-                    Life was normal until it wasn't. The diagnosis came like a thunderbolt – 
+                    Life was normal until it wasn&apos;t. The diagnosis came like a thunderbolt – 
                     my heart was failing, and without intervention, I had months to live.
                   </p>
                 </div>
@@ -95,7 +138,7 @@ export default function Story() {
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                <span className="text-green-400">Chapter 2:</span> A New Heart, A New Beginning
+                <span className="text-green-400">Part 3:</span> A New Heart, A New Beginning
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-green-400 to-red-400 mx-auto"></div>
             </div>
@@ -147,7 +190,7 @@ export default function Story() {
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                <span className="text-red-400">Chapter 3:</span> When Kidneys Fail
+                <span className="text-red-400">Part 4:</span> When Kidneys Fail
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-red-400 to-green-400 mx-auto"></div>
             </div>
@@ -203,7 +246,7 @@ export default function Story() {
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                <span className="text-green-400">Chapter 4:</span> The Birth of The Beating Edge
+                <span className="text-green-400">Part 5:</span> The Birth of The Beating Edge
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-green-400 to-red-400 mx-auto"></div>
             </div>
@@ -214,7 +257,7 @@ export default function Story() {
                   Sitting in that dialysis chair for hours, four times a week, I had a lot 
                   of time to think. I met incredible people – fellow patients fighting their 
                   own battles, healthcare workers who were true heroes, doctors pushing the 
-                  boundaries of what's possible.
+                  boundaries of what&apos;s possible.
                 </p>
                 <p className="text-lg text-red-400 font-semibold">
                   That&apos;s when I realized: these stories needed to be told.

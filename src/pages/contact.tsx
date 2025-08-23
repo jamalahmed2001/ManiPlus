@@ -46,7 +46,7 @@ export default function Contact() {
       await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate API call
       
       setIsSubmitted(true);
-    } catch (_err) {
+    } catch {
       setError('Something went wrong. Please try again.');
     } finally {
       setIsLoading(false);
@@ -81,9 +81,10 @@ export default function Contact() {
               <span className="text-green-400">Connect</span>
             </h1>
             <p className="text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto">
-              Every story matters. Whether you're a patient, healthcare professional, 
-              researcher, or just someone who believes in the power of shared experiences, 
-              we want to hear from you.
+              Your story lives in the spaces between diagnosis and hope, in the quiet moments 
+              when everything changes. Whether you&apos;re a patient who understands the whisper 
+              of failing hearts, a healthcare worker who holds space for others&apos; pain, or 
+              someone with wisdom born from unexpected places — we want to listen.
             </p>
           </div>
         </section>
@@ -96,8 +97,9 @@ export default function Contact() {
                 <div className="text-4xl mb-4">🎙️</div>
                 <h3 className="text-xl font-bold text-red-400 mb-3">Share Your Story</h3>
                 <p className="text-gray-300 mb-4">
-                  Have a medical journey that could inspire others? We&apos;d love to feature 
-                  your story on the podcast.
+                  Your journey through illness, treatment, or recovery holds wisdom that others 
+                  need to hear. The courage found in hospital beds, the strength discovered in 
+                  vulnerability — these stories matter.
                 </p>
                 <div className="text-sm text-gray-400">
                   Select &quot;Guest Application&quot; in the form below
@@ -110,8 +112,9 @@ export default function Contact() {
                 <div className="text-4xl mb-4">👨‍⚕️</div>
                 <h3 className="text-xl font-bold text-green-400 mb-3">Healthcare Professionals</h3>
                 <p className="text-gray-300 mb-4">
-                  Doctors, nurses, researchers, and healthcare workers - share your insights 
-                  and expertise with our community.
+                  You&apos;ve held space for others&apos; pain, celebrated small victories, and witnessed 
+                  the profound moments when medicine meets humanity. Share what you&apos;ve learned 
+                  in those sacred spaces.
                 </p>
                 <div className="text-sm text-gray-400">
                   Select &quot;Professional Inquiry&quot; below
@@ -160,7 +163,7 @@ export default function Contact() {
                 <div className="text-center mb-8">
                   <h2 className="text-2xl font-bold text-white mb-2">Get In Touch</h2>
                   <p className="text-gray-400">
-                    Fill out the form below and we'll get back to you within 24-48 hours.
+                    Fill out the form below and we&apos;ll get back to you within 24-48 hours.
                   </p>
                 </div>
 
