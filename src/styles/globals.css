@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  /* Mani+ neon palette */
+  --color-mani-red: #ff2a2a; /* neon red */
+  --color-mani-green: #00ff66; /* neon green */
+  --color-mani-dark: #0b0b0c; /* deep charcoal */
+}
+
+/* Base background for the site */
+html, body, #__next {
+  height: 100%;
+}
+
+body {
+  background: radial-gradient(1200px 600px at 10% -10%, color-mix(in srgb, var(--color-mani-red) 12%, transparent) 0%, transparent 60%),
+    radial-gradient(1200px 600px at 110% -10%, color-mix(in srgb, var(--color-mani-green) 12%, transparent) 0%, transparent 60%),
+    var(--color-mani-dark);
+  color: white;
+}
+
+/* Neon utilities */
+.neon-red {
+  color: var(--color-mani-red);
+  text-shadow: 0 0 6px color-mix(in srgb, var(--color-mani-red) 60%, transparent),
+    0 0 18px color-mix(in srgb, var(--color-mani-red) 40%, transparent);
+}
+
+.neon-green {
+  color: var(--color-mani-green);
+  text-shadow: 0 0 6px color-mix(in srgb, var(--color-mani-green) 60%, transparent),
+    0 0 18px color-mix(in srgb, var(--color-mani-green) 40%, transparent);
+}
+
+.glow-red {
+  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--color-mani-red) 70%, transparent))
+    drop-shadow(0 0 24px color-mix(in srgb, var(--color-mani-red) 50%, transparent));
+}
+
+.glow-green {
+  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--color-mani-green) 70%, transparent))
+    drop-shadow(0 0 24px color-mix(in srgb, var(--color-mani-green) 50%, transparent));
+}
+
+.card {
+  background: color-mix(in srgb, white 6%, transparent);
+  border: 1px solid color-mix(in srgb, white 10%, transparent);
+  border-radius: 14px;
+  padding: 1.25rem;
+  backdrop-filter: blur(6px);
+}
