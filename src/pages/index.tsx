@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import Head from "next/head";
+import { NextSeo } from "next-seo";
 import Link from "next/link";
 import Image from "next/image";
-import { Header, Section, Card, Button, EpisodeCard, Newsletter, PodcastStructuredData } from '@/components';
+import { Header, Section, Card, Button, EpisodeCard, Newsletter, PodcastSubscribeLinks } from '@/components';
+import { PodcastStructuredData, WebsiteStructuredData, generateHomepageSEO, type Episode } from '@/components/SEO';
 
 export default function Home() {
   const [isVisible, setIsVisible] = useState(false);
@@ -49,8 +50,8 @@ export default function Home() {
     };
   }, [router.events]);
 
-  // Episode data
-  const episodes = [
+  // Episode data with enhanced SEO metadata
+  const episodes: (Episode & { color: 'red' | 'green' | 'white' })[] = [
     {
       id: '1',
       title: 'The Day Everything Changed',
@@ -58,6 +59,9 @@ export default function Home() {
       duration: '45 minutes',
       releaseDate: 'January 15, 2024',
       episodeNumber: 'EP 001',
+      slug: 'the-day-everything-changed',
+      topics: ['heart transplant', 'diagnosis', 'patient journey', 'medical transformation'],
+      keywords: ['heart failure', 'transplant surgery', 'medical recovery', 'patient story'],
       color: 'red' as const
     },
     {
@@ -67,6 +71,9 @@ export default function Home() {
       duration: '52 minutes',
       releaseDate: 'January 22, 2024',
       episodeNumber: 'EP 002',
+      slug: 'dr-sarah-chen-immunosuppression',
+      topics: ['immunosuppression', 'transplant medicine', 'medical research', 'rejection prevention'],
+      keywords: ['immunology', 'transplant drugs', 'medical innovation', 'organ rejection'],
       color: 'green' as const
     },
     {
@@ -76,6 +83,9 @@ export default function Home() {
       duration: '38 minutes',
       releaseDate: 'January 29, 2024', 
       episodeNumber: 'EP 003',
+      slug: 'marias-marathon-new-heart',
+      topics: ['recovery', 'marathon', 'athletic achievement', 'inspiration'],
+      keywords: ['heart transplant recovery', 'post-transplant exercise', 'athletic inspiration', 'medical recovery'],
       color: 'white' as const
     }
   ];
@@ -97,41 +107,10 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <title>The Beating Edge with Mani+ | Transformative Healthcare Stories & Medical Insights</title>
-        <meta name="description" content="When hearts whisper, we listen. Intimate conversations from hospital rooms, dialysis chairs, and the quiet moments when everything changes. The stories that live between the medical charts." />
-        <meta name="keywords" content="heart transplant podcast, dialysis stories, medical podcast, healthcare stories, patient advocacy, transplant recipient, chronic illness, medical innovation, healthcare professionals, patient journey, organ transplant, kidney failure, medical research, health podcast" />
-        <meta name="author" content="Mani+" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        
-        {/* Open Graph / Facebook */}
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://thebeatingedge.com/" />
-        <meta property="og:title" content="The Beating Edge with Mani+ | Healthcare Stories That Transform Lives" />
-        <meta property="og:description" content="The conversations that happen in hospital rooms, dialysis chairs, and the quiet moments when everything changes. Where medicine meets the stories we don&apos;t always tell." />
-        <meta property="og:image" content="/mani+logo.png" />
-
-        {/* Twitter */}
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://thebeatingedge.com/" />
-        <meta property="twitter:title" content="The Beating Edge with Mani+ | Healthcare Stories That Transform Lives" />
-        <meta property="twitter:description" content="The conversations that happen in hospital rooms and the quiet moments when everything changes." />
-        <meta property="twitter:image" content="/mani+logo.png" />
-
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="canonical" href="https://thebeatingedge.com/" />
-      </Head>
-
-      <PodcastStructuredData
-        episodes={episodes.map(ep => ({
-          name: `${ep.episodeNumber}: ${ep.title}`,
-          description: ep.description,
-          url: `https://thebeatingedge.com/episodes/${ep.id}`,
-          datePublished: ep.releaseDate.replace(/(\w+) (\d+), (\d+)/, '$3-$1-$2'),
-          duration: ep.duration,
-          episodeNumber: parseInt(ep.id)
-        }))}
-      />
+      <NextSeo {...generateHomepageSEO()} />
+      
+      <PodcastStructuredData episodes={episodes} />
+      <WebsiteStructuredData />
 
       <Header />
 
@@ -321,40 +300,7 @@ export default function Home() {
                 when hearts learn to listen and stories find their voice.
               </p>
 
-              <div className="flex flex-wrap justify-center gap-4 mb-8">
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
-                  className="flex items-center gap-2"
-                  onClick={() => window.open('#', '_blank')}
-                >
-                  <span className="text-green-400">🎵</span> Spotify
-                </Button>
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
-                  className="flex items-center gap-2"
-                  onClick={() => window.open('#', '_blank')}
-                >
-                  <span className="text-purple-400">🍎</span> Apple Podcasts
-                </Button>
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
-                  className="flex items-center gap-2"
-                  onClick={() => window.open('#', '_blank')}
-                >
-                  <span className="text-orange-400">🎧</span> Google Podcasts
-                </Button>
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
-                  className="flex items-center gap-2"
-                  onClick={() => window.open('#', '_blank')}
-                >
-                  <span className="text-red-400">📱</span> RSS Feed
-                </Button>
-              </div>
+              <PodcastSubscribeLinks className="mb-8" />
 
               <Newsletter />
             </div>

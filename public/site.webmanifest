@@ -1,0 +1,48 @@
+{
+  "name": "The Beating Edge with Mani+ - Healthcare Stories & Medical Insights",
+  "short_name": "The Beating Edge",
+  "description": "Raw, honest conversations about life after heart transplant, kidney failure, and the resilience of the human spirit",
+  "icons": [
+    {
+      "src": "/mani+logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/mani+logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#000000",
+  "lang": "en-US",
+  "scope": "/",
+  "orientation": "portrait-primary",
+  "categories": ["health", "medical", "podcast", "healthcare", "education"],
+  "shortcuts": [
+    {
+      "name": "Latest Episodes",
+      "short_name": "Episodes",
+      "description": "Listen to the latest podcast episodes",
+      "url": "/#episodes",
+      "icons": [{ "src": "/mani+logo.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Mani+'s Story",
+      "short_name": "Story",
+      "description": "Read about Mani+'s healthcare journey",
+      "url": "/story",
+      "icons": [{ "src": "/mani+logo.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Contact",
+      "short_name": "Contact",
+      "description": "Get in touch or share your story",
+      "url": "/contact",
+      "icons": [{ "src": "/mani+logo.png", "sizes": "96x96" }]
+    }
+  ]
+}
