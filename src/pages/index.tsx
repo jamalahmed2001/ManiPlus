@@ -1,188 +1,287 @@
+import { useState, useEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
 
 export default function Home() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
   return (
     <>
       <Head>
-        <title>Mani+ Podcast – The Beating Edge</title>
-        <meta
-          name="description"
-          content="The Beating Edge with Mani+: real stories on heart transplant, kidney failure, and thriving with dialysis—conversations with patients, doctors, and health pros."
-        />
+        <title>The Beating Edge with Mani+ | Health & Transplant Stories</title>
+        <meta name="description" content="Join Mani+, a heart transplant recipient and dialysis patient, as he interviews doctors, health professionals, and fellow patients sharing their inspiring journeys and medical insights." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="min-h-screen">
-        {/* Hero */}
-        <section className="relative mx-auto flex max-w-6xl flex-col items-center px-6 py-20 text-center sm:py-28">
-          <NeonMicLogo />
+      <main className="min-h-screen bg-black text-white overflow-x-hidden">
+        {/* Hero Section */}
+        <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-black">
+          {/* Animated background elements */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-red-500/10 rounded-full blur-3xl animate-pulse"></div>
+            <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-green-400/10 rounded-full blur-2xl animate-pulse delay-1000"></div>
+          </div>
 
-          <h1 className="mt-8 text-4xl font-extrabold tracking-tight text-white sm:text-6xl">
-            <span className="block">THE BEATING EDGE</span>
-            <span className="mt-2 block text-3xl font-semibold text-zinc-300 sm:text-4xl">
-              with <span className="neon-green">Mani+</span>
-            </span>
-          </h1>
+          <div className={`relative z-10 text-center px-4 max-w-6xl mx-auto transition-all duration-2000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+            {/* Microphone SVG */}
+            <div className="mb-8 flex justify-center">
+              <svg width="120" height="120" viewBox="0 0 120 120" className="text-red-400 drop-shadow-2xl">
+                <defs>
+                  <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                    <feMerge> 
+                      <feMergeNode in="coloredBlur"/>
+                      <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                  </filter>
+                </defs>
+                <path d="M60 20 C50 20, 42 28, 42 38 L42 62 C42 72, 50 80, 60 80 C70 80, 78 72, 78 62 L78 38 C78 28, 70 20, 60 20 Z" 
+                      fill="currentColor" filter="url(#neonGlow)" />
+                <path d="M30 62 C30 82, 46 98, 66 98 L66 108 L54 108 L54 114 L66 114 L66 114" 
+                      fill="none" stroke="currentColor" strokeWidth="4" filter="url(#neonGlow)" />
+                <path d="M90 62 C90 82, 74 98, 54 98" 
+                      fill="none" stroke="currentColor" strokeWidth="4" filter="url(#neonGlow)" />
+                <path d="M46 38 L46 44 M46 50 L46 56 M74 38 L74 44 M74 50 L74 56" 
+                      stroke="currentColor" strokeWidth="2" />
+                {/* Heartbeat line */}
+                <path d="M10 60 L25 60 L30 45 L35 75 L40 30 L45 90 L50 60 L90 60 L95 45 L100 75 L105 60 L110 60" 
+                      fill="none" stroke="currentColor" strokeWidth="2" className="animate-pulse" />
+              </svg>
+            </div>
 
-          <p className="mx-auto mt-6 max-w-2xl text-balance text-lg text-zinc-300/90">
-            A raw, hopeful and expert-led podcast about navigating heart transplant,
-            kidney failure, and life on dialysis. Mani talks with fellow patients,
-            caregivers, cardiologists, nephrologists and mental health professionals.
-          </p>
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight">
+              <span className="text-red-400 drop-shadow-2xl font-extrabold tracking-wider">THE BEATING EDGE</span>
+              <br />
+              <span className="text-gray-300 text-3xl md:text-4xl lg:text-5xl font-light">with</span>
+              <br />
+              <span className="text-green-400 drop-shadow-2xl font-extrabold tracking-wider animate-pulse">Mani+</span>
+            </h1>
 
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <a
-              href="#subscribe"
-              className="rounded-full bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/20"
-            >
-              Subscribe Free
-            </a>
-            <a
-              href="#episodes"
-              className="rounded-full border border-white/25 px-6 py-3 text-sm font-semibold text-white/90 transition hover:bg-white/10"
-            >
-              Latest Episodes
-            </a>
+            <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-8 leading-relaxed">
+              Raw, honest conversations about life after heart transplant, kidney failure, and the resilience of the human spirit
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button className="bg-red-500 hover:bg-red-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-red-500/25">
+                🎧 Listen Now
+              </button>
+              <button className="border-2 border-green-400 text-green-400 hover:bg-green-400 hover:text-black px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105">
+                📖 Read Mani+&#39;s Story
+              </button>
+            </div>
+          </div>
+
+          {/* Scroll indicator */}
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <svg width="24" height="24" fill="none" stroke="currentColor" className="text-gray-400">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
           </div>
         </section>
 
-        {/* About */}
-        <section id="about" className="mx-auto max-w-5xl px-6 py-16">
-          <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
-            About the show
-          </h2>
-          <div className="mt-5 grid gap-8 md:grid-cols-2">
-            <div className="card">
-              <h3 className="neon-red text-xl font-semibold">Mani’s story</h3>
-              <p className="mt-2 text-zinc-300/90">
-                Mani received a heart transplant and faces kidney failure, attending
-                dialysis 4× per week. This show is his platform to document the
-                journey, ask better questions, and share practical tactics for
-                living fully.
-              </p>
-            </div>
-            <div className="card">
-              <h3 className="neon-green text-xl font-semibold">Who you’ll hear from</h3>
-              <p className="mt-2 text-zinc-300/90">
-                Patients, transplant teams, nephrologists, cardiologists, social
-                workers, dietitians, mental health pros and researchers—each brings
-                concise, compassionate insights you can use today.
-              </p>
+        {/* About Mani+ Section */}
+        <section className="py-20 bg-gradient-to-r from-gray-900 via-black to-gray-900">
+          <div className="max-w-6xl mx-auto px-4">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <h2 className="text-4xl md:text-5xl font-bold mb-6">
+                  <span className="text-green-400">Meet</span> <span className="text-red-400">Mani+</span>
+                </h2>
+                <div className="space-y-6 text-lg text-gray-300 leading-relaxed">
+                  <p>
+                    Life changed forever when my heart began to fail. After receiving a life-saving heart transplant, 
+                    I thought the hardest part was behind me. Then came kidney failure and the reality of dialysis 
+                    four times a week.
+                  </p>
+                  <p>
+                    But I discovered something powerful in these challenges: every patient, every doctor, every 
+                    healthcare worker has a story that needs to be heard. Stories of resilience, innovation, 
+                    hope, and the incredible advances in modern medicine.
+                  </p>
+                  <p className="text-red-400 font-semibold">
+                    The Beating Edge isn&#39;t just about surviving – it&#39;s about thriving and sharing the wisdom 
+                    gained along the way.
+                  </p>
+                </div>
+              </div>
+              <div className="relative">
+                <div className="bg-gradient-to-br from-red-500/20 to-green-400/20 p-8 rounded-2xl backdrop-blur-sm border border-gray-800">
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-3">
+                      <span className="w-3 h-3 bg-red-400 rounded-full animate-pulse"></span>
+                      <span className="text-gray-300">Heart Transplant Recipient</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <span className="w-3 h-3 bg-blue-400 rounded-full animate-pulse delay-300"></span>
+                      <span className="text-gray-300">Dialysis Patient (4x/week)</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <span className="w-3 h-3 bg-green-400 rounded-full animate-pulse delay-700"></span>
+                      <span className="text-gray-300">Health Advocate & Storyteller</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Episodes placeholder */}
-        <section id="episodes" className="mx-auto max-w-6xl px-6 py-16">
-          <div className="flex items-end justify-between gap-6">
-            <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
-              Featured episodes
+        {/* What We Cover Section */}
+        <section className="py-20 bg-black">
+          <div className="max-w-6xl mx-auto px-4 text-center">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              <span className="text-red-400">What We</span> <span className="text-green-400">Explore</span>
             </h2>
-            <Link href="#subscribe" className="text-sm text-zinc-300 hover:underline">
-              Get new episodes →
-            </Link>
-          </div>
+            <p className="text-xl text-gray-400 mb-12 max-w-3xl mx-auto">
+              Deep conversations that matter, with the people who know medicine from the inside out
+            </p>
 
-          <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              {
-                title: "Dialysis 101 with a nephrology nurse",
-                description:
-                  "Understanding modalities, fatigue management, and questions to ask your care team.",
-              },
-              {
-                title: "What every transplant patient should track",
-                description:
-                  "A cardiologist on meds, labs, and advocating for yourself between visits.",
-              },
-              {
-                title: "Nutrition on dialysis—beyond phosphorus",
-                description:
-                  "A renal dietitian on realistic eating, labs, and grocery tactics on a budget.",
-              },
-            ].map((ep, i) => (
-              <article key={i} className="card">
-                <h3 className="text-lg font-semibold text-white">{ep.title}</h3>
-                <p className="mt-2 text-sm text-zinc-300/90">{ep.description}</p>
-                <div className="mt-4 flex items-center gap-3">
-                  <button className="rounded-md bg-white/10 px-3 py-2 text-sm text-white hover:bg-white/20">
-                    Play trailer
-                  </button>
-                  <button className="rounded-md border border-white/20 px-3 py-2 text-sm text-white/80 hover:bg-white/10">
-                    Show notes
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="bg-gradient-to-br from-gray-900 to-gray-800 p-8 rounded-xl border border-gray-700 hover:border-red-400/50 transition-all duration-300 group hover:scale-105">
+                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">🫀</div>
+                <h3 className="text-xl font-bold text-red-400 mb-3">Patient Stories</h3>
+                <p className="text-gray-300">Real experiences from transplant recipients, chronic illness warriors, and those navigating complex medical journeys.</p>
+              </div>
+
+              <div className="bg-gradient-to-br from-gray-900 to-gray-800 p-8 rounded-xl border border-gray-700 hover:border-green-400/50 transition-all duration-300 group hover:scale-105">
+                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">👨‍⚕️</div>
+                <h3 className="text-xl font-bold text-green-400 mb-3">Medical Insights</h3>
+                <p className="text-gray-300">Leading doctors and specialists share breakthrough treatments, research, and what&#39;s on the horizon for patient care.</p>
+              </div>
+
+              <div className="bg-gradient-to-br from-gray-900 to-gray-800 p-8 rounded-xl border border-gray-700 hover:border-blue-400/50 transition-all duration-300 group hover:scale-105">
+                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">💪</div>
+                <h3 className="text-xl font-bold text-blue-400 mb-3">Living Fully</h3>
+                <p className="text-gray-300">Practical advice on thriving with chronic conditions, from mental health to daily life hacks that actually work.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Latest Episodes Section */}
+        <section className="py-20 bg-gradient-to-br from-gray-900 via-black to-gray-900">
+          <div className="max-w-6xl mx-auto px-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
+              <span className="text-red-400">Latest</span> <span className="text-green-400">Episodes</span>
+            </h2>
+
+            <div className="space-y-6">
+              <div className="bg-gray-900/50 p-6 rounded-xl border border-gray-800 hover:border-red-400/30 transition-all duration-300 group">
+                <div className="flex flex-col md:flex-row md:items-center gap-4">
+                  <div className="flex-1">
+                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-red-400 transition-colors">
+                      EP 001: The Day Everything Changed
+                    </h3>
+                    <p className="text-gray-400 mb-2">Mani+ shares his personal journey from diagnosis to transplant, and the unexpected challenges that followed.</p>
+                    <div className="text-sm text-gray-500">45 minutes • Released Jan 15, 2024</div>
+                  </div>
+                  <button className="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-full transition-colors">
+                    ▶ Play
                   </button>
                 </div>
-              </article>
-            ))}
+              </div>
+
+              <div className="bg-gray-900/50 p-6 rounded-xl border border-gray-800 hover:border-green-400/30 transition-all duration-300 group">
+                <div className="flex flex-col md:flex-row md:items-center gap-4">
+                  <div className="flex-1">
+                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-green-400 transition-colors">
+                      EP 002: Dr. Sarah Chen on Breakthrough Immunosuppression
+                    </h3>
+                    <p className="text-gray-400 mb-2">Leading transplant immunologist discusses new protocols reducing rejection while minimizing side effects.</p>
+                    <div className="text-sm text-gray-500">52 minutes • Released Jan 22, 2024</div>
+                  </div>
+                  <button className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-full transition-colors">
+                    ▶ Play
+                  </button>
+                </div>
+              </div>
+
+              <div className="bg-gray-900/50 p-6 rounded-xl border border-gray-800 hover:border-blue-400/30 transition-all duration-300 group">
+                <div className="flex flex-col md:flex-row md:items-center gap-4">
+                  <div className="flex-1">
+                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">
+                      EP 003: Maria&#39;s Marathon - Running with a New Heart
+                    </h3>
+                    <p className="text-gray-400 mb-2">Heart transplant recipient Maria Torres on how she went from ICU to completing her first marathon in 18 months.</p>
+                    <div className="text-sm text-gray-500">38 minutes • Released Jan 29, 2024</div>
+                  </div>
+                  <button className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-full transition-colors">
+                    ▶ Play
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* Subscribe */}
-        <section id="subscribe" className="mx-auto max-w-3xl px-6 pb-24">
-          <div className="card">
-            <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
-              Never miss a heartbeat
+        {/* Subscribe Section */}
+        <section className="py-20 bg-gradient-to-r from-red-500/10 via-black to-green-400/10">
+          <div className="max-w-4xl mx-auto text-center px-4">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              <span className="text-red-400">Never Miss</span> <span className="text-green-400">A Beat</span>
             </h2>
-            <p className="mt-2 text-zinc-300/90">
-              Join for episode alerts and behind‑the‑scenes updates. No spam.
+            <p className="text-xl text-gray-300 mb-8">
+              Get notified when new episodes drop and join a community that understands the journey.
             </p>
-            <form
-              className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-[1fr_auto]"
-              onSubmit={(e) => e.preventDefault()}
-            >
-              <input
-                type="email"
-                placeholder="you@health.com"
-                className="w-full rounded-md border border-white/15 bg-black/30 px-4 py-3 text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-[--color-mani-green]"
-              />
-              <button
-                type="submit"
-                className="neon-green rounded-md px-6 py-3 font-semibold text-black/90"
-              >
-                Subscribe
-              </button>
-            </form>
+
+            <div className="flex flex-wrap justify-center gap-6 mb-8">
+              <Link href="#" className="bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-full flex items-center gap-2 transition-all duration-300 transform hover:scale-105">
+                <span className="text-green-400">🎵</span> Spotify
+              </Link>
+              <Link href="#" className="bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-full flex items-center gap-2 transition-all duration-300 transform hover:scale-105">
+                <span className="text-purple-400">🍎</span> Apple Podcasts
+              </Link>
+              <Link href="#" className="bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-full flex items-center gap-2 transition-all duration-300 transform hover:scale-105">
+                <span className="text-orange-400">🎧</span> Google Podcasts
+              </Link>
+              <Link href="#" className="bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-full flex items-center gap-2 transition-all duration-300 transform hover:scale-105">
+                <span className="text-red-400">📱</span> RSS Feed
+              </Link>
+            </div>
+
+            <div className="bg-gray-900/50 p-8 rounded-xl border border-gray-800 max-w-md mx-auto">
+              <h3 className="text-xl font-bold text-white mb-4">Stay Connected</h3>
+              <div className="space-y-3">
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="w-full px-4 py-3 bg-gray-800 text-white rounded-lg border border-gray-700 focus:border-red-400 focus:outline-none transition-colors"
+                />
+                <button className="w-full bg-gradient-to-r from-red-500 to-green-400 text-white py-3 rounded-lg font-semibold hover:from-red-600 hover:to-green-500 transition-all duration-300">
+                  Subscribe for Updates
+                </button>
+              </div>
+            </div>
           </div>
         </section>
 
         {/* Footer */}
-        <footer className="border-t border-white/10 py-10 text-center text-sm text-zinc-400">
-          © {new Date().getFullYear()} Mani.plus — The Beating Edge
+        <footer className="bg-black py-12 border-t border-gray-800">
+          <div className="max-w-6xl mx-auto px-4 text-center">
+            <div className="mb-6">
+              <h3 className="text-2xl font-bold">
+                <span className="text-red-400">The Beating Edge</span> <span className="text-gray-400">with</span> <span className="text-green-400">Mani+</span>
+              </h3>
+            </div>
+            <p className="text-gray-400 mb-6 max-w-2xl mx-auto">
+              Sharing stories of resilience, medical innovation, and the human spirit in healthcare.
+              Every heartbeat tells a story.
+            </p>
+            <div className="flex justify-center space-x-6 text-gray-400">
+              <Link href="#" className="hover:text-red-400 transition-colors">Contact</Link>
+              <Link href="#" className="hover:text-green-400 transition-colors">About</Link>
+              <Link href="#" className="hover:text-blue-400 transition-colors">Privacy</Link>
+            </div>
+            <p className="text-gray-600 text-sm mt-6">
+              © 2024 The Beating Edge with Mani+. All rights reserved.
+            </p>
+          </div>
         </footer>
       </main>
     </>
-  );
-}
-
-function NeonMicLogo() {
-  return (
-    <svg
-      className="glow-red glow-green h-24 w-24 sm:h-28 sm:w-28"
-      viewBox="0 0 100 100"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden
-    >
-      <g strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-        {/* Heartbeat line left (red) */}
-        <path
-          d="M2 60 H20 L28 48 L36 64 L44 52 H58"
-          stroke="var(--color-mani-red)"
-        />
-        {/* Mic (outline, red) */}
-        <rect x="60" y="28" width="18" height="28" rx="9" stroke="var(--color-mani-red)" />
-        <line x1="69" y1="32" x2="69" y2="36" stroke="var(--color-mani-red)" />
-        <line x1="69" y1="48" x2="69" y2="52" stroke="var(--color-mani-red)" />
-        <path d="M60 48a9 9 0 0 0 18 0" stroke="var(--color-mani-red)" />
-        <path d="M69 57v8" stroke="var(--color-mani-red)" />
-        <path d="M60 65h18" stroke="var(--color-mani-red)" />
-        {/* Heartbeat right (green) */}
-        <path
-          d="M78 60 H88 L92 54 L96 62 L100 60"
-          stroke="var(--color-mani-green)"
-        />
-      </g>
-    </svg>
   );
 }

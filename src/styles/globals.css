@@ -3,51 +3,98 @@
 @theme {
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  /* Mani+ neon palette */
-  --color-mani-red: #ff2a2a; /* neon red */
-  --color-mani-green: #00ff66; /* neon green */
-  --color-mani-dark: #0b0b0c; /* deep charcoal */
 }
 
-/* Base background for the site */
-html, body, #__next {
-  height: 100%;
+/* Custom animations and effects for The Beating Edge */
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 }
 
-body {
-  background: radial-gradient(1200px 600px at 10% -10%, color-mix(in srgb, var(--color-mani-red) 12%, transparent) 0%, transparent 60%),
-    radial-gradient(1200px 600px at 110% -10%, color-mix(in srgb, var(--color-mani-green) 12%, transparent) 0%, transparent 60%),
-    var(--color-mani-dark);
-  color: white;
+@keyframes neonFlicker {
+  0%, 100% { 
+    text-shadow: 
+      0 0 5px currentColor,
+      0 0 10px currentColor,
+      0 0 15px currentColor,
+      0 0 20px currentColor;
+  }
+  50% { 
+    text-shadow: 
+      0 0 2px currentColor,
+      0 0 5px currentColor,
+      0 0 8px currentColor,
+      0 0 12px currentColor;
+  }
 }
 
-/* Neon utilities */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(239, 68, 68, 0.6);
+  }
+}
+
 .neon-red {
-  color: var(--color-mani-red);
-  text-shadow: 0 0 6px color-mix(in srgb, var(--color-mani-red) 60%, transparent),
-    0 0 18px color-mix(in srgb, var(--color-mani-red) 40%, transparent);
+  text-shadow: 
+    0 0 5px #ef4444,
+    0 0 10px #ef4444,
+    0 0 15px #ef4444,
+    0 0 20px #ef4444;
 }
 
 .neon-green {
-  color: var(--color-mani-green);
-  text-shadow: 0 0 6px color-mix(in srgb, var(--color-mani-green) 60%, transparent),
-    0 0 18px color-mix(in srgb, var(--color-mani-green) 40%, transparent);
+  text-shadow: 
+    0 0 5px #22c55e,
+    0 0 10px #22c55e,
+    0 0 15px #22c55e,
+    0 0 20px #22c55e;
 }
 
-.glow-red {
-  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--color-mani-red) 70%, transparent))
-    drop-shadow(0 0 24px color-mix(in srgb, var(--color-mani-red) 50%, transparent));
+.heartbeat-animation {
+  animation: heartbeat 1.5s ease-in-out infinite;
 }
 
-.glow-green {
-  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--color-mani-green) 70%, transparent))
-    drop-shadow(0 0 24px color-mix(in srgb, var(--color-mani-green) 50%, transparent));
+.neon-flicker {
+  animation: neonFlicker 3s ease-in-out infinite;
 }
 
-.card {
-  background: color-mix(in srgb, white 6%, transparent);
-  border: 1px solid color-mix(in srgb, white 10%, transparent);
-  border-radius: 14px;
-  padding: 1.25rem;
-  backdrop-filter: blur(6px);
+.pulse-glow {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar for dark theme */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #111827;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #374151;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4b5563;
+}
+
+/* Loading animation for better UX */
+.loading-pulse {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  animation: loading 1.5s ease-in-out infinite;
+}
+
+@keyframes loading {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
