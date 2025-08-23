@@ -91,7 +91,7 @@ export const PodcastStructuredData: React.FC<PodcastEpisodeStructuredDataProps> 
       "@type": "PodcastEpisode",
       "name": `${episode.episodeNumber}: ${episode.title}`,
       "description": episode.description,
-      "url": `${siteConfig.siteUrl}/episodes/${episode.slug || episode.id}`,
+      "url": `${siteConfig.siteUrl}/episodes/${episode.slug ?? episode.id}`,
       "datePublished": new Date(episode.releaseDate).toISOString(),
       "duration": episode.duration,
       "episodeNumber": parseInt(episode.episodeNumber.replace(/\D/g, '')),
@@ -110,8 +110,8 @@ export const PodcastStructuredData: React.FC<PodcastEpisodeStructuredDataProps> 
       },
       "isAccessibleForFree": true,
       "inLanguage": "en-US",
-      "keywords": episode.topics?.join(', ') || siteConfig.keywords.slice(0, 10).join(', '),
-      "transcript": episode.transcript ? `${siteConfig.siteUrl}/episodes/${episode.slug || episode.id}/transcript` : undefined
+      "keywords": episode.topics?.join(', ') ?? siteConfig.keywords.slice(0, 10).join(', '),
+      "transcript": episode.transcript ? `${siteConfig.siteUrl}/episodes/${episode.slug ?? episode.id}/transcript` : undefined
     }))
   }
 
@@ -248,13 +248,13 @@ export const PersonStructuredData: React.FC<PersonProfileStructuredDataProps> = 
     "url": siteConfig.siteUrl,
     "image": {
       "@type": "ImageObject",
-      "url": person.image || `${siteConfig.siteUrl}${siteConfig.defaultImage}`
+      "url": person.image ?? `${siteConfig.siteUrl}${siteConfig.defaultImage}`
     },
-    "sameAs": person.sameAs || [],
-    "jobTitle": person.jobTitle || "Healthcare Advocate & Storyteller",
+    "sameAs": person.sameAs ?? [],
+    "jobTitle": person.jobTitle ?? "Healthcare Advocate & Storyteller",
     "worksFor": {
       "@type": "Organization",
-      "name": person.worksFor || siteConfig.siteName,
+      "name": person.worksFor ?? siteConfig.siteName,
       "url": siteConfig.siteUrl
     },
     "description": person.description,
@@ -331,7 +331,7 @@ export const EpisodeStructuredData: React.FC<{ episode: Episode }> = ({ episode 
   return (
     <ArticleJsonLd
       type="BlogPosting"
-      url={`${siteConfig.siteUrl}/episodes/${episode.slug || episode.id}`}
+      url={`${siteConfig.siteUrl}/episodes/${episode.slug ?? episode.id}`}
       title={`${episode.episodeNumber}: ${episode.title}`}
       images={[`${siteConfig.siteUrl}${siteConfig.defaultImage}`]}
       datePublished={new Date(episode.releaseDate).toISOString()}

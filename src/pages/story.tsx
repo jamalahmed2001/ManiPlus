@@ -41,7 +41,7 @@ export default function Story() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-5xl md:text-6xl font-bold mb-6">
-                <span className="text-red-400">Mani+'s</span>{' '}
+                <span className="text-red-400">Mani&apos;s</span>{' '}
                 <span className="text-green-400">Story</span>
               </h1>
               <p className="text-xl text-gray-300 mb-8 leading-relaxed">
@@ -74,18 +74,18 @@ export default function Story() {
             <Card className="p-8 mb-8">
               <p className="text-lg text-gray-300 leading-relaxed mb-6">
                 My heart began to fail quietly — not with drama, but with whispers I tried to ignore. 
-                The shortness of breath climbing stairs. The fatigue that sleep couldn't cure. The night 
+                The shortness of breath climbing stairs. The fatigue that sleep couldn&apos;t cure. The night 
                 I woke up gasping, unable to breathe, knowing something fundamental had shifted.
               </p>
               <p className="text-lg text-gray-300 leading-relaxed mb-6">
-                Hospital lights became my new normal. Beeping monitors, the shuffle of nurses' feet, 
+                Hospital lights became my new normal. Beeping monitors, the shuffle of nurses&apos; feet, 
                 the weight of uncertainty pressing down on everything. Congestive heart failure, they said. 
                 Your heart is tired. We need to help it, or find you a new one.
               </p>
               <blockquote className="border-l-4 border-red-400 pl-6 my-8">
                 <p className="text-xl italic text-red-400">
-                  "When your heart begins to fail, so do the illusions about being invincible. 
-                  But what emerges is something more powerful — the courage to share what we've learned in the darkness."
+                  &quot;When your heart begins to fail, so do the illusions about being invincible. 
+                  But what emerges is something more powerful — the courage to share what we&apos;ve learned in the darkness.&quot;
                 </p>
               </blockquote>
             </Card>
@@ -104,16 +104,16 @@ export default function Story() {
               <h3 className="text-2xl font-bold text-green-400 mb-4">The Call</h3>
               <p className="text-gray-300 leading-relaxed">
                 3:47 AM. The phone rings with the news every transplant patient both hopes for and fears: 
-                "We have a heart for you." Someone else's tragedy became my second chance. 
+                &quot;We have a heart for you.&quot; Someone else&apos;s tragedy became my second chance. 
                 The weight of that gift — the responsibility, the gratitude, the complex emotions — 
-                it changes you in ways medical textbooks can't capture.
+                it changes you in ways medical textbooks can&apos;t capture.
               </p>
             </Card>
             
             <Card className="p-8">
               <h3 className="text-2xl font-bold text-green-400 mb-4">Recovery & Reality</h3>
               <p className="text-gray-300 leading-relaxed">
-                Recovery isn't a straight line. It's learning to live with someone else's heart, 
+                Recovery isn&apos;t a straight line. It&apos;s learning to live with someone else&apos;s heart, 
                 daily medications, constant monitoring, and the knowledge that this gift comes with 
                 an expiration date. But it also brings clarity about what truly matters — 
                 the stories we tell, the connections we make, the hope we can offer others walking similar paths.
@@ -134,11 +134,11 @@ export default function Story() {
               <p className="text-lg text-gray-300 leading-relaxed mb-6">
                 The heart transplant was just the beginning. Kidney failure followed — another challenge, 
                 another adaptation. Four times a week, I sit in dialysis chairs, connected to machines 
-                that do what my kidneys can't. Three and a half hours at a time, watching my blood 
+                that do what my kidneys can&apos;t. Three and a half hours at a time, watching my blood 
                 cycle through filters, cleaning toxins my body can no longer handle alone.
               </p>
               <p className="text-lg text-gray-300 leading-relaxed mb-6">
-                But here's what I discovered in those dialysis chairs: I wasn't alone. Around me sat 
+                But here&apos;s what I discovered in those dialysis chairs: I wasn&apos;t alone. Around me sat 
                 warriors — people fighting battles most of the world never sees. Veterans dealing with 
                 service-related kidney disease. Mothers managing diabetes complications while raising families. 
                 Elderly patients with stories spanning decades of medical challenges.
@@ -221,7 +221,7 @@ export default function Story() {
               </div>
               
               <div>
-                <h3 className="text-2xl font-bold text-green-400 mb-4">What I've Learned</h3>
+                <h3 className="text-2xl font-bold text-green-400 mb-4">What I&apos;ve Learned</h3>
                 <ul className="space-y-3 text-gray-300">
                   <li className="flex items-center gap-3">
                     <span className="w-2 h-2 bg-green-400 rounded-full flex-shrink-0"></span>
@@ -253,9 +253,9 @@ export default function Story() {
               <span className="text-green-400">The Conversation</span>
             </h2>
             <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-              If you have a healthcare story that deserves to be heard, if you're walking 
+              If you have a healthcare story that deserves to be heard, if you&apos;re walking 
               a similar path, or if you simply believe in the power of authentic human connection 
-              in medicine — I'd love to hear from you.
+              in medicine — I&apos;d love to hear from you.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact">
@@ -276,8 +276,8 @@ export default function Story() {
         <Section background="black" className="py-12">
           <div className="max-w-3xl mx-auto text-center">
             <p className="text-gray-400 italic">
-              "Every heartbeat carries a story. Every story deserves to be heard. 
-              Every voice has the power to heal — both the speaker and the listener."
+              &quot;Every heartbeat carries a story. Every story deserves to be heard. 
+              Every voice has the power to heal — both the speaker and the listener.&quot;
             </p>
             <p className="text-gray-500 mt-4">— Mani+</p>
           </div>

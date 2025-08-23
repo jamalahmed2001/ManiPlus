@@ -45,8 +45,8 @@ export const podcastConfig: PodcastRSSConfig = {
 
 // Convert duration from "X minutes" to seconds or iTunes format
 export const formatDuration = (duration: string): { seconds: number; formatted: string } => {
-  const match = duration.match(/(\d+)\s*minutes?/i)
-  if (match && match[1]) {
+  const match = /(\d+)\s*minutes?/i.exec(duration)
+  if (match?.[1]) {
     const minutes = parseInt(match[1])
     const seconds = minutes * 60
     const hours = Math.floor(minutes / 60)
@@ -70,13 +70,13 @@ export const formatRSSDate = (dateString: string): string => {
 
 // Generate comprehensive RSS 2.0 feed with iTunes extensions
 export const generateRSSFeed = (episodes: Episode[]): string => {
-  const { seconds: _, formatted: duration } = episodes.length > 0 && episodes[0] ? formatDuration(episodes[0].duration) : { seconds: 0, formatted: '0:00' }
+  // const { formatted: duration } = episodes.length > 0 && episodes[0] ? formatDuration(episodes[0].duration) : { formatted: '0:00' }
   
   const rssItems = episodes
     .sort((a, b) => new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime())
     .map((episode) => {
-      const episodeUrl = `${siteConfig.siteUrl}/episodes/${episode.slug || episode.id}`
-      const { seconds, formatted } = formatDuration(episode.duration)
+      const episodeUrl = `${siteConfig.siteUrl}/episodes/${episode.slug ?? episode.id}`
+      const { formatted } = formatDuration(episode.duration)
       
       return `
     <item>
@@ -88,7 +88,7 @@ export const generateRSSFeed = (episodes: Episode[]): string => {
       <author>${podcastConfig.owner.email} (${podcastConfig.author})</author>
       <category><![CDATA[Healthcare]]></category>
       <category><![CDATA[Medical Stories]]></category>
-      ${episode.topics?.map(topic => `<category><![CDATA[${topic}]]></category>`).join('\n      ') || ''}
+      ${episode.topics?.map(topic => `<category><![CDATA[${topic}]]></category>`).join('\n      ') ?? ''}
       
       <!-- iTunes-specific tags -->
       <itunes:title><![CDATA[${episode.title}]]></itunes:title>
@@ -116,7 +116,7 @@ export const generateRSSFeed = (episodes: Episode[]): string => {
         ${episode.transcript ? `<h3>Transcript</h3><p>Full transcript available at: <a href="${episodeUrl}/transcript">${episodeUrl}/transcript</a></p>` : ''}
         <hr/>
         <p><strong>Listen to more episodes:</strong> <a href="${siteConfig.siteUrl}">${siteConfig.siteName}</a></p>
-        <p><strong>Episode Topics:</strong> ${episode.topics?.join(', ') || 'Healthcare, Medical Stories'}</p>
+        <p><strong>Episode Topics:</strong> ${episode.topics?.join(', ') ?? 'Healthcare, Medical Stories'}</p>
         ${episode.keywords?.length ? `<p><strong>Keywords:</strong> ${episode.keywords.join(', ')}</p>` : ''}
       ]]></content:encoded>
       
@@ -126,7 +126,7 @@ export const generateRSSFeed = (episodes: Episode[]): string => {
       <!-- Social media optimization -->
       <media:thumbnail url="${podcastConfig.imageUrl}" />
       <media:description><![CDATA[${episode.description}]]></media:description>
-      <media:keywords>${[...(episode.topics || []), ...(episode.keywords || [])].join(', ')}</media:keywords>
+      <media:keywords>${[...(episode.topics ?? []), ...(episode.keywords ?? [])].join(', ')}</media:keywords>
     </item>`
     }).join('')
 
@@ -230,7 +230,7 @@ export const generateAtomFeed = (episodes: Episode[]): string => {
   const atomEntries = episodes
     .sort((a, b) => new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime())
     .map((episode) => {
-      const episodeUrl = `${siteConfig.siteUrl}/episodes/${episode.slug || episode.id}`
+      const episodeUrl = `${siteConfig.siteUrl}/episodes/${episode.slug ?? episode.id}`
       
       return `
   <entry>
@@ -252,7 +252,7 @@ export const generateAtomFeed = (episodes: Episode[]): string => {
       <p><strong>Episode:</strong> ${episode.episodeNumber}</p>
       ${episode.topics?.length ? `<p><strong>Topics:</strong> ${episode.topics.join(', ')}</p>` : ''}
     ]]></content>
-    ${episode.topics?.map(topic => `<category term="${topic}" />`).join('\n    ') || ''}
+    ${episode.topics?.map(topic => `<category term="${topic}" />`).join('\n    ') ?? ''}
   </entry>`
     }).join('')
 
@@ -295,12 +295,12 @@ export const generateJSONFeed = (episodes: Episode[]): object => {
     items: episodes
       .sort((a, b) => new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime())
       .map((episode) => ({
-        id: `${siteConfig.siteUrl}/episodes/${episode.slug || episode.id}`,
-        url: `${siteConfig.siteUrl}/episodes/${episode.slug || episode.id}`,
+        id: `${siteConfig.siteUrl}/episodes/${episode.slug ?? episode.id}`,
+        url: `${siteConfig.siteUrl}/episodes/${episode.slug ?? episode.id}`,
         title: `${episode.episodeNumber}: ${episode.title}`,
         content_html: `
           <p>${episode.description}</p>
-          ${episode.transcript ? `<p><a href="${siteConfig.siteUrl}/episodes/${episode.slug || episode.id}/transcript">Read full transcript</a></p>` : ''}
+          ${episode.transcript ? `<p><a href="${siteConfig.siteUrl}/episodes/${episode.slug ?? episode.id}/transcript">Read full transcript</a></p>` : ''}
           <p><strong>Duration:</strong> ${episode.duration}</p>
           <p><strong>Episode:</strong> ${episode.episodeNumber}</p>
           ${episode.topics?.length ? `<p><strong>Topics:</strong> ${episode.topics.join(', ')}</p>` : ''}
@@ -312,9 +312,9 @@ export const generateJSONFeed = (episodes: Episode[]): object => {
           name: podcastConfig.author,
           url: podcastConfig.siteUrl
         },
-        tags: [...(episode.topics || []), ...(episode.keywords || [])],
+        tags: [...(episode.topics ?? []), ...(episode.keywords ?? [])],
         attachments: [{
-          url: `${siteConfig.siteUrl}/episodes/${episode.slug || episode.id}/audio.mp3`,
+          url: `${siteConfig.siteUrl}/episodes/${episode.slug ?? episode.id}/audio.mp3`,
           mime_type: "audio/mpeg",
           title: `${episode.episodeNumber}: ${episode.title}`
         }]

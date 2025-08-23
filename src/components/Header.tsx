@@ -51,13 +51,13 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-red-400 to-green-400 rounded-full flex items-center justify-center">
+            <div className="w-8 h-8 bg-gradient-to-r from-red-500 to-green-500 rounded-full flex items-center justify-center">
               <span className="text-black font-bold text-sm">M+</span>
             </div>
             <span className="font-bold text-white hidden sm:block">
               <span className="text-red-400">The Beating Edge</span>{' '}
               <span className="text-gray-400">with</span>{' '}
-              <span className="text-green-400">Mani+</span>
+              <span className="text-green-500">Mani+</span>
             </span>
           </Link>
 
@@ -65,13 +65,13 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
           <nav className="hidden md:flex items-center gap-8">
           <button
               onClick={() => navigateToSection('about')}
-              className="text-gray-300 hover:text-green-400 transition-colors"
+              className="text-gray-300 hover:text-green-500 transition-colors"
             >
               About
             </button>
             <button
               onClick={() => navigateToSection('episodes')}
-              className="text-gray-300 hover:text-red-400 transition-colors"
+              className="text-gray-300 hover:text-red-500 transition-colors"
             >
               Episodes
             </button>
@@ -117,13 +117,13 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
             <div className="flex flex-col gap-4">
               <button
                 onClick={() => navigateToSection('episodes')}
-                className="text-gray-300 hover:text-red-400 transition-colors text-left"
+                className="text-gray-300 hover:text-red-500 transition-colors text-left"
               >
                 Episodes
               </button>
               <button
                 onClick={() => navigateToSection('about')}
-                className="text-gray-300 hover:text-green-400 transition-colors text-left"
+                className="text-gray-300 hover:text-green-500 transition-colors text-left"
               >
                 About
               </button>

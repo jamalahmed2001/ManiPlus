@@ -3,6 +3,24 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 // Webhook endpoint for auto-updating RSS feeds when new episodes are published
 // This can be triggered by your CMS, content management system, or publishing workflow
 
+interface EpisodeData {
+  id: string
+  title: string
+  description?: string
+  duration?: string
+  releaseDate?: string
+  episodeNumber?: string
+  slug?: string
+  transcript?: string
+  topics?: string[]
+  keywords?: string[]
+}
+
+interface WebhookRequestBody {
+  action: 'episode_published' | 'episode_updated' | 'episode_deleted'
+  episode: EpisodeData
+}
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   // Only allow POST requests
   if (req.method !== 'POST') {
@@ -18,7 +36,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(401).json({ error: 'Unauthorized' })
     }
 
-    const { action, episode } = req.body
+    const { action, episode } = req.body as WebhookRequestBody
 
     switch (action) {
       case 'episode_published':
@@ -61,7 +79,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 }
 
-async function handleEpisodePublished(episode: any) {
+async function handleEpisodePublished(episode: EpisodeData) {
   // Logic to handle new episode publication
   console.log('New episode published:', episode.title)
   
@@ -76,7 +94,7 @@ async function handleEpisodePublished(episode: any) {
   await notifySubscribers('new_episode', episode)
 }
 
-async function handleEpisodeUpdated(episode: any) {
+async function handleEpisodeUpdated(episode: EpisodeData) {
   // Logic to handle episode updates
   console.log('Episode updated:', episode.title)
   
@@ -95,7 +113,7 @@ async function regenerateFeeds() {
     // Trigger feed regeneration by making requests to feed endpoints
     // This will cause them to rebuild with fresh data
     
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
     
     // Trigger RSS feed regeneration
     await fetch(`${baseUrl}/api/feed.xml`)
@@ -111,7 +129,7 @@ async function regenerateFeeds() {
 async function regenerateSitemaps() {
   try {
     // Trigger sitemap regeneration
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
     await fetch(`${baseUrl}/server-sitemap.xml`)
     
     console.log('Sitemaps regenerated')
@@ -120,7 +138,7 @@ async function regenerateSitemaps() {
   }
 }
 
-async function notifySubscribers(type: string, episode: any) {
+async function notifySubscribers(type: string, episode: EpisodeData) {
   // Implement subscriber notification logic here
   // Could integrate with email services, push notifications, etc.
   

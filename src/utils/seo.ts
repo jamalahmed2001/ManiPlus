@@ -3,7 +3,7 @@ import type { NextSeoProps, ArticleJsonLdProps } from 'next-seo'
 // Base site configuration
 export const siteConfig = {
   siteName: 'The Beating Edge with Mani+',
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://thebeatingedge.com',
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://thebeatingedge.com',
   description: 'Raw, honest conversations about life after heart transplant, kidney failure, and the resilience of the human spirit. Join Mani+, a heart transplant recipient and dialysis patient, for powerful conversations with doctors, researchers, and fellow patients.',
   author: 'Mani+',
   twitter: '@thebeatingedge',
@@ -191,17 +191,17 @@ export const generateHomepageSEO = (): NextSeoProps => {
 
 // Generate SEO for individual episodes
 export const generateEpisodeSEO = (episode: Episode): NextSeoProps => {
-  const episodeUrl = `${siteConfig.siteUrl}/episodes/${episode.slug || episode.id}`
+  const episodeUrl = `${siteConfig.siteUrl}/episodes/${episode.slug ?? episode.id}`
   const imageUrl = `${siteConfig.siteUrl}${siteConfig.defaultImage}`
   
   // Enhanced description with keywords
-  const enhancedDescription = `${episode.description} ${episode.topics?.join(', ') || ''}`
+  const enhancedDescription = `${episode.description} ${episode.topics?.join(', ') ?? ''}`
   
   // Generate keywords from episode content
   const episodeKeywords = [
     ...siteConfig.keywords,
-    ...(episode.topics || []),
-    ...(episode.keywords || []),
+    ...(episode.topics ?? []),
+    ...(episode.keywords ?? []),
     episode.title.toLowerCase(),
     `episode ${episode.episodeNumber}`,
     'podcast episode',
@@ -338,7 +338,7 @@ export const generateStoryPageSEO = (): NextSeoProps => {
 // Generate enhanced Article JSON-LD for episodes
 export const generateEpisodeArticleJsonLd = (episode: Episode): ArticleJsonLdProps => {
   return {
-    url: `${siteConfig.siteUrl}/episodes/${episode.slug || episode.id}`,
+    url: `${siteConfig.siteUrl}/episodes/${episode.slug ?? episode.id}`,
     title: `${episode.episodeNumber}: ${episode.title}`,
     images: [`${siteConfig.siteUrl}${siteConfig.defaultImage}`],
     datePublished: new Date(episode.releaseDate).toISOString(),
@@ -365,7 +365,7 @@ export const extractKeywords = (content: string, additionalKeywords: string[] = 
     .filter(word => word.length > 3 && !commonWords.has(word))
   
   const wordCount = words.reduce((acc, word) => {
-    acc[word] = (acc[word] || 0) + 1
+    acc[word] = (acc[word] ?? 0) + 1
     return acc
   }, {} as Record<string, number>)
   
@@ -378,7 +378,7 @@ export const extractKeywords = (content: string, additionalKeywords: string[] = 
 }
 
 // Generate LLM-optimized content summary
-export const generateContentSummary = (content: string, maxLength: number = 160): string => {
+export const generateContentSummary = (content: string, maxLength = 160): string => {
   if (content.length <= maxLength) return content
   
   // Find the last complete sentence within the limit

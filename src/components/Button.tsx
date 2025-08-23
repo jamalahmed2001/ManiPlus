@@ -13,10 +13,10 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const buttonVariants: Record<ButtonVariant, string> = {
-  primary: 'bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white shadow-lg hover:shadow-red-500/25',
-  secondary: 'bg-gradient-to-r from-green-400 to-green-500 hover:from-green-500 hover:to-green-600 text-black shadow-lg hover:shadow-green-400/25',
-  outline: 'border-2 border-green-400 text-green-400 hover:bg-green-400 hover:text-black',
-  ghost: 'bg-gray-800 hover:bg-gray-700 text-white border border-gray-700 hover:border-gray-600'
+  primary: 'bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white shadow-lg hover:shadow-red-500/25 border border-red-500/50',
+  secondary: 'bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white shadow-lg hover:shadow-green-500/25 border border-green-500/50',
+  outline: 'border-2 border-green-500 text-green-400 hover:bg-green-500 hover:text-white transition-all duration-300',
+  ghost: 'bg-white hover:bg-gray-100 text-black shadow-lg hover:shadow-white/25 border-2 border-white hover:border-gray-200 transition-all duration-300'
 };
 
 const buttonSizes: Record<ButtonSize, string> = {
@@ -38,7 +38,7 @@ export const Button: React.FC<ButtonProps> = ({
   return (
     <button
       className={cn(
-        'font-semibold rounded-full transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-red-500/20 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none',
+        'font-semibold rounded-full transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-green-500/20 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none',
         buttonVariants[variant],
         buttonSizes[size],
         className

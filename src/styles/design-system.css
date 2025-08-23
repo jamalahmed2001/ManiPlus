@@ -6,14 +6,18 @@
 /* Custom Properties - Design Tokens */
 :root {
   /* === COLORS === */
-  /* Brand Colors - Heart & Health Theme */
+  /* Brand Colors - Red, Green & White Theme */
   --color-heart-primary: #ef4444; /* Vibrant red - heart, life, energy */
   --color-heart-secondary: #dc2626; /* Deeper red - strength, determination */
   --color-heart-accent: #fecaca; /* Light red - warmth, care */
   
-  --color-health-primary: #10b981; /* Medical green - healing, growth */
-  --color-health-secondary: #059669; /* Deep green - expertise, trust */
-  --color-health-accent: #a7f3d0; /* Light green - hope, renewal */
+  --color-health-primary: #22c55e; /* Vibrant green - healing, growth */
+  --color-health-secondary: #16a34a; /* Deep green - expertise, trust */
+  --color-health-accent: #bbf7d0; /* Light green - hope, renewal */
+  
+  --color-pure-white: #ffffff; /* Pure white - clarity, peace */
+  --color-white-soft: #fafafa; /* Soft white - gentle, calm */
+  --color-white-accent: #f8fafc; /* White accent - subtle highlight */
   
   --color-pulse-primary: #f59e0b; /* Golden pulse - innovation, breakthrough */
   --color-pulse-secondary: #d97706; /* Deep amber - wisdom, experience */
@@ -168,15 +172,23 @@
   background: linear-gradient(135deg, var(--color-health-primary) 0%, var(--color-health-secondary) 100%);
 }
 
-.gradient-pulse {
-  background: linear-gradient(135deg, var(--color-pulse-primary) 0%, var(--color-pulse-secondary) 100%);
+.gradient-white {
+  background: linear-gradient(135deg, var(--color-pure-white) 0%, var(--color-white-soft) 100%);
 }
 
 .gradient-medical {
   background: linear-gradient(135deg, 
     var(--color-heart-primary) 0%, 
-    var(--color-pulse-primary) 50%, 
+    var(--color-pure-white) 50%, 
     var(--color-health-primary) 100%);
+}
+
+.gradient-red-white {
+  background: linear-gradient(135deg, var(--color-heart-primary) 0%, var(--color-pure-white) 100%);
+}
+
+.gradient-green-white {
+  background: linear-gradient(135deg, var(--color-health-primary) 0%, var(--color-pure-white) 100%);
 }
 
 /* Mesh Gradient Backgrounds */

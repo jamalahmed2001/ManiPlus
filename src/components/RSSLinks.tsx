@@ -12,7 +12,7 @@ export const RSSLinks: React.FC<RSSLinksProps> = ({
   variant = 'horizontal',
   showLabels = true 
 }) => {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://thebeatingedge.com'
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://thebeatingedge.com'
   
   const feeds = [
     {
@@ -66,7 +66,7 @@ export const RSSLinks: React.FC<RSSLinksProps> = ({
 
 // Dedicated podcast subscribe component with platform-specific links
 export const PodcastSubscribeLinks: React.FC<{ className?: string }> = ({ className = '' }) => {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://thebeatingedge.com'
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://thebeatingedge.com'
   const rssUrl = `${baseUrl}/api/feed.xml`
   
   const platforms = [

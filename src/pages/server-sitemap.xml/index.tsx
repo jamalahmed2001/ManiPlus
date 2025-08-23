@@ -5,7 +5,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   // This would typically fetch from your CMS, database, or API
   // For now, we'll create dynamic entries for episodes and other content
   
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://thebeatingedge.com'
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://thebeatingedge.com'
   
   // Sample episodes - replace with actual data fetching
   const episodes = [
@@ -63,4 +63,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 }
 
 // Default export to prevent next.js errors
-export default function Sitemap() {}
+export default function Sitemap() {
+  return null
+}

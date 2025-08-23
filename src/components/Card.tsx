@@ -11,13 +11,13 @@ interface CardProps {
 const cardVariants = {
   default: 'bg-gray-900/50 border-gray-800',
   hover: 'bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700 hover:scale-105 transition-all duration-300 group',
-  gradient: 'bg-gradient-to-br from-red-500/20 to-green-400/20 backdrop-blur-sm border-gray-800'
+  gradient: 'bg-gradient-to-br from-red-500/20 via-white/10 to-green-500/20 backdrop-blur-sm border-gray-800'
 };
 
 const borderColors = {
-  red: 'hover:border-red-400/50',
-  green: 'hover:border-green-400/50',
-  white: 'hover:border-white/50',
+  red: 'hover:border-red-500/70 hover:shadow-red-500/20',
+  green: 'hover:border-green-500/70 hover:shadow-green-500/20',
+  white: 'hover:border-white/70 hover:shadow-white/20',
   gray: 'hover:border-gray-600'
 };
 

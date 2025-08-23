@@ -120,7 +120,7 @@ export default function Home() {
           {/* Animated background elements */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-red-500/10 rounded-full blur-3xl animate-pulse"></div>
-            <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-green-400/10 rounded-full blur-2xl animate-pulse delay-1000"></div>
+            <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-green-500/10 rounded-full blur-2xl animate-pulse delay-1000"></div>
             <div className="absolute top-3/4 left-1/2 w-32 h-32 bg-white/5 rounded-full blur-xl animate-pulse delay-500"></div>
           </div>
 
@@ -151,7 +151,7 @@ export default function Home() {
                 <div className="text-sm text-gray-400">Episodes</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl md:text-3xl font-bold text-green-400">{statsCounter.listeners.toLocaleString()}+</div>
+                <div className="text-2xl md:text-3xl font-bold text-green-500">{statsCounter.listeners.toLocaleString()}+</div>
                 <div className="text-sm text-gray-400">Listeners</div>
               </div>
               <div className="text-center">
@@ -193,7 +193,7 @@ export default function Home() {
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
                 <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                  <span className="text-green-400">Meet</span> <span className="text-red-400">Mani+</span>
+                  <span className="text-green-500">Meet</span> <span className="text-red-400">Mani+</span>
                 </h2>
                 <div className="space-y-6 text-lg text-gray-300 leading-relaxed">
                   <p>
@@ -213,7 +213,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="relative">
-                <div className="bg-gradient-to-br from-red-500/20 to-green-400/20 p-8 rounded-2xl backdrop-blur-sm border border-gray-800">
+                <div className="bg-gradient-to-br from-red-500/20 to-green-500/20 p-8 rounded-2xl backdrop-blur-sm border border-gray-800">
                   <div className="space-y-4">
                     <div className="flex items-center gap-3">
                       <span className="w-3 h-3 bg-red-400 rounded-full animate-pulse"></span>
@@ -224,7 +224,7 @@ export default function Home() {
                       <span className="text-gray-300">Dialysis Patient</span>
                     </div>
                     <div className="flex items-center gap-3">
-                      <span className="w-3 h-3 bg-green-400 rounded-full animate-pulse delay-700"></span>
+                      <span className="w-3 h-3 bg-green-500 rounded-full animate-pulse delay-700"></span>
                       <span className="text-gray-300">Health Advocate & Storyteller</span>
                     </div>
                   </div>
@@ -237,7 +237,7 @@ export default function Home() {
         <Section background="black">
           <div className="text-center">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              <span className="text-red-400">What We</span> <span className="text-green-400">Explore</span>
+              <span className="text-red-400">What We</span> <span className="text-green-500">Explore</span>
             </h2>
             <p className="text-xl text-gray-400 mb-12 max-w-3xl mx-auto">
               The stories that live in hospital hallways, the wisdom found in waiting rooms, and the courage discovered when everything changes
@@ -255,7 +255,7 @@ export default function Home() {
               <Card variant="hover" borderColor="green" className="p-8">
                 <div className="text-center">
                   <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">👨‍⚕️</div>
-                  <h3 className="text-xl font-bold text-green-400 mb-3">Medical Insights</h3>
+                  <h3 className="text-xl font-bold text-green-500 mb-3">Medical Insights</h3>
                   <p className="text-gray-300">The doctors who stay late, the nurses who remember your name, the researchers changing tomorrow&apos;s medicine. Their dedication deserves spotlight.</p>
                 </div>
               </Card>
@@ -274,7 +274,7 @@ export default function Home() {
         {/* Latest Episodes Section */}
         <Section background="gradient-gray" id="episodes">
             <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
-              <span className="text-red-400">Latest</span> <span className="text-green-400">Episodes</span>
+              <span className="text-red-400">Latest</span> <span className="text-green-500">Episodes</span>
             </h2>
 
             <div className="space-y-6">
@@ -293,7 +293,7 @@ export default function Home() {
         <Section background="gradient-red-green" id="subscribe">
             <div className="text-center">
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                <span className="text-red-400">Never Miss</span> <span className="text-green-400">A Beat</span>
+                <span className="text-red-400">Never Miss</span> <span className="text-green-500">A Beat</span>
               </h2>
               <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
                 Join others who know that the most important conversations happen in quiet moments — 
@@ -311,7 +311,7 @@ export default function Home() {
           <div className="max-w-6xl mx-auto px-4 text-center">
             <div className="mb-6">
               <h3 className="text-2xl font-bold">
-                <span className="text-red-400">The Beating Edge</span> <span className="text-gray-400">with</span> <span className="text-green-400">Mani+</span>
+                <span className="text-red-400">The Beating Edge</span> <span className="text-gray-400">with</span> <span className="text-green-500">Mani+</span>
               </h3>
             </div>
             <p className="text-gray-400 mb-6 max-w-2xl mx-auto">
@@ -320,7 +320,7 @@ export default function Home() {
             </p>
             <div className="flex justify-center space-x-6 text-gray-400 mb-6">
               <Link href="/contact" className="hover:text-red-400 transition-colors">Contact</Link>
-              <Link href="/story" className="hover:text-green-400 transition-colors">Mani&apos;s Story</Link>
+              <Link href="/story" className="hover:text-green-500 transition-colors">Mani&apos;s Story</Link>
               <button 
                 onClick={() => scrollToSection('about')}
                 className="hover:text-white transition-colors"
