@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./design-system.css";
 
 @theme {
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif,
@@ -97,4 +98,330 @@ html {
 @keyframes loading {
   0% { transform: translateX(-100%); }
   100% { transform: translateX(100%); }
+}
+
+/* ==========================================================================
+   ENHANCED VISUAL EFFECTS FOR THE BEATING EDGE
+   ========================================================================== */
+
+/* Floating Background Elements */
+.floating-orbs {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: var(--z-behind);
+}
+
+.floating-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.3;
+  animation: float 20s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  25% { transform: translate3d(20px, -30px, 0) scale(1.1); }
+  50% { transform: translate3d(-20px, -60px, 0) scale(0.9); }
+  75% { transform: translate3d(30px, -30px, 0) scale(1.05); }
+}
+
+/* Medical Waveform Background */
+.medical-waveform {
+  background-image: 
+    linear-gradient(90deg, transparent 0%, var(--color-heart-primary) 2%, transparent 4%),
+    linear-gradient(90deg, transparent 40%, var(--color-health-primary) 42%, transparent 44%),
+    linear-gradient(90deg, transparent 80%, var(--color-pulse-primary) 82%, transparent 84%);
+  background-size: 200px 2px, 150px 2px, 100px 2px;
+  background-repeat: repeat-x;
+  background-position: 0 0, 0 50%, 0 100%;
+  animation: waveform 8s linear infinite;
+  opacity: 0.1;
+}
+
+@keyframes waveform {
+  0% { background-position: 0 0, 0 50%, 0 100%; }
+  100% { background-position: 200px 0, 150px 50%, 100px 100%; }
+}
+
+/* Glass Card Enhancement */
+.glass-card {
+  background: rgba(26, 26, 26, 0.7);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all var(--transition-base);
+}
+
+.glass-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Medical-themed Button Enhancements */
+.btn-medical {
+  position: relative;
+  background: linear-gradient(135deg, var(--color-heart-primary), var(--color-health-primary));
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: var(--border-radius-lg);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  overflow: hidden;
+}
+
+.btn-medical::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--color-health-primary), var(--color-heart-primary));
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.btn-medical:hover::before {
+  opacity: 1;
+}
+
+.btn-medical:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-heart-glow);
+}
+
+.btn-medical > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Particle Effect Background */
+.particle-field {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: var(--z-behind);
+}
+
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: var(--color-health-primary);
+  border-radius: 50%;
+  animation: particle 15s linear infinite;
+  opacity: 0;
+}
+
+@keyframes particle {
+  0% {
+    transform: translateY(100vh) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-10vh) translateX(100px);
+    opacity: 0;
+  }
+}
+
+/* Enhanced Typography */
+.text-display {
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-extrabold);
+  line-height: var(--line-height-tight);
+  letter-spacing: -0.02em;
+}
+
+.text-hero {
+  font-size: var(--font-size-6xl);
+  background: linear-gradient(135deg, 
+    var(--color-heart-primary) 0%, 
+    var(--color-pulse-primary) 30%,
+    var(--color-health-primary) 60%,
+    var(--color-heart-accent) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 400% 400%;
+  animation: gradient-shift 4s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Interactive Hover States */
+.hover-lift {
+  transition: all var(--transition-base);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+}
+
+.hover-glow:hover {
+  box-shadow: 
+    var(--shadow-lg),
+    0 0 30px rgba(var(--color-heart-primary), 0.3);
+}
+
+/* Medical Cross Animation */
+.medical-cross {
+  position: relative;
+  display: inline-block;
+}
+
+.medical-cross::before,
+.medical-cross::after {
+  content: '';
+  position: absolute;
+  background: currentColor;
+  transition: all var(--transition-base);
+}
+
+.medical-cross::before {
+  width: 20px;
+  height: 4px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.medical-cross::after {
+  width: 4px;
+  height: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.medical-cross:hover::before,
+.medical-cross:hover::after {
+  background: var(--color-health-primary);
+  box-shadow: 0 0 10px currentColor;
+}
+
+/* Status Indicators */
+.status-indicator {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.status-dot.active {
+  background: var(--color-health-primary);
+  box-shadow: 0 0 0 4px rgba(var(--color-health-primary), 0.2);
+}
+
+.status-dot.warning {
+  background: var(--color-pulse-primary);
+  box-shadow: 0 0 0 4px rgba(var(--color-pulse-primary), 0.2);
+}
+
+.status-dot.critical {
+  background: var(--color-heart-primary);
+  box-shadow: 0 0 0 4px rgba(var(--color-heart-primary), 0.2);
+}
+
+/* Enhanced Focus States for Accessibility */
+.focus-enhanced {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  transition: all var(--transition-fast);
+}
+
+.focus-enhanced:focus-visible {
+  outline: 2px solid var(--color-health-primary);
+  outline-offset: 2px;
+  box-shadow: 
+    0 0 0 4px rgba(var(--color-health-primary), 0.1),
+    var(--shadow-lg);
+}
+
+/* Loading States */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-neutral-800) 25%,
+    var(--color-neutral-700) 50%,
+    var(--color-neutral-800) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+  .text-hero {
+    font-size: var(--font-size-4xl);
+  }
+  
+  .floating-orb {
+    filter: blur(40px);
+  }
+  
+  .glass-card {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+}
+
+/* High contrast mode improvements */
+@media (prefers-contrast: high) {
+  .glass-card {
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid white;
+  }
+  
+  .floating-orb {
+    display: none;
+  }
+  
+  .medical-waveform {
+    display: none;
+  }
+}
+
+/* Print optimizations */
+@media print {
+  .floating-orbs,
+  .particle-field,
+  .medical-waveform {
+    display: none;
+  }
+  
+  .glass-card {
+    background: white;
+    border: 1px solid black;
+    color: black;
+  }
 }
