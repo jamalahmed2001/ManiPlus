@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Header, Section, Card, Button, EpisodeCard, Newsletter, PodcastSubscribeLinks } from '@/components';
 import { PodcastStructuredData, WebsiteStructuredData, generateHomepageSEO, type Episode } from '@/components/SEO';
+import { episodes as episodeData } from '@/data/episodes';
 
 export default function Home() {
   const [isVisible, setIsVisible] = useState(false);
@@ -50,45 +51,11 @@ export default function Home() {
     };
   }, [router.events]);
 
-  // Episode data with enhanced SEO metadata
-  const episodes: (Episode & { color: 'red' | 'green' | 'white' })[] = [
-    {
-      id: '1',
-      title: 'The Day Everything Changed',
-      description: 'Mani+ opens up about his journey from diagnosis to heart transplant, sharing the raw emotions, unexpected challenges, and profound gratitude that shaped his perspective on life and medicine.',
-      duration: '45 minutes',
-      releaseDate: 'January 15, 2024',
-      episodeNumber: 'EP 001',
-      slug: 'the-day-everything-changed',
-      topics: ['heart transplant', 'diagnosis', 'patient journey', 'medical transformation'],
-      keywords: ['heart failure', 'transplant surgery', 'medical recovery', 'patient story'],
-      color: 'red' as const
-    },
-    {
-      id: '2', 
-      title: 'Dr. Sarah Chen on Breakthrough Immunosuppression',
-      description: 'Leading transplant immunologist Dr. Sarah Chen discusses revolutionary new protocols that are reducing rejection rates while minimizing long-term medication side effects, offering hope for better patient outcomes.',
-      duration: '52 minutes',
-      releaseDate: 'January 22, 2024',
-      episodeNumber: 'EP 002',
-      slug: 'dr-sarah-chen-immunosuppression',
-      topics: ['immunosuppression', 'transplant medicine', 'medical research', 'rejection prevention'],
-      keywords: ['immunology', 'transplant drugs', 'medical innovation', 'organ rejection'],
-      color: 'green' as const
-    },
-    {
-      id: '3',
-      title: "Maria's Marathon - Running with a New Heart", 
-      description: 'Heart transplant recipient Maria Torres shares her incredible journey from ICU to completing her first marathon just 18 months post-transplant, proving that limitation is often just a state of mind.',
-      duration: '38 minutes',
-      releaseDate: 'January 29, 2024', 
-      episodeNumber: 'EP 003',
-      slug: 'marias-marathon-new-heart',
-      topics: ['recovery', 'marathon', 'athletic achievement', 'inspiration'],
-      keywords: ['heart transplant recovery', 'post-transplant exercise', 'athletic inspiration', 'medical recovery'],
-      color: 'white' as const
-    }
-  ];
+  // Episode data with enhanced SEO metadata and display colors
+  const episodes: (Episode & { color: 'red' | 'green' | 'white' })[] = episodeData.map((episode, index) => ({
+    ...episode,
+    color: ['red', 'green', 'white'][index % 3] as 'red' | 'green' | 'white'
+  }));
 
   const handlePlayEpisode = (episodeId: string) => {
     setCurrentPlayingEpisode(episodeId);

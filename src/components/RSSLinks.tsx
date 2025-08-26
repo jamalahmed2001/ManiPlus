@@ -74,42 +74,36 @@ export const PodcastSubscribeLinks: React.FC<{ className?: string }> = ({ classN
       name: 'Apple Podcasts',
       icon: '🍎',
       url: `https://podcasts.apple.com/podcast/id1234567890`, // Replace with actual Apple Podcasts URL
-      color: 'purple-400'
+      hoverColors: 'hover:text-purple-400 hover:border-purple-400'
     },
     {
       name: 'Spotify',
       icon: '🎵',
       url: `https://open.spotify.com/show/1234567890`, // Replace with actual Spotify URL
-      color: 'green-400'
+      hoverColors: 'hover:text-green-400 hover:border-green-400'
     },
     {
-      name: 'Google Podcasts',
-      icon: '🔍',
-      url: `https://podcasts.google.com/feed/${encodeURIComponent(rssUrl)}`,
-      color: 'blue-400'
+      name: 'YouTube',
+      icon: '🎥',
+      url: `https://www.youtube.com/watch?v=dQw4w9WgXcQ`,
+      hoverColors: 'hover:text-red-500 hover:border-red-500'
     },
     {
-      name: 'Overcast',
-      icon: '☁️',
-      url: `https://overcast.fm/itunes1234567890`, // Replace with actual Overcast URL
-      color: 'orange-400'
-    },
-    {
-      name: 'Pocket Casts',
-      icon: '📱',
-      url: `https://pca.st/episode/1234567890`, // Replace with actual Pocket Casts URL
-      color: 'red-400'
+      name: 'Patreon',
+      icon: '💰',
+      url: `https://patreon.com/thebeatingedge`, // Replace with actual Patreon URL
+      hoverColors: 'hover:text-orange-400 hover:border-orange-400'
     },
     {
       name: 'RSS Feed',
       icon: '📡',
       url: rssUrl,
-      color: 'gray-400'
+      hoverColors: 'hover:text-gray-300 hover:border-gray-300'
     }
   ]
 
   return (
-    <div className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 ${className}`}>
+    <div className={`flex flex-wrap justify-center gap-4 ${className}`}>
       {platforms.map((platform) => (
         <a 
           key={platform.name}
@@ -121,11 +115,11 @@ export const PodcastSubscribeLinks: React.FC<{ className?: string }> = ({ classN
         >
           <Button 
             variant="ghost" 
-            size="sm" 
-            className={`flex flex-col items-center gap-2 p-4 h-auto transition-all duration-300 hover:scale-105 hover:text-${platform.color} border border-gray-700 hover:border-${platform.color}`}
+            size="md" 
+            className={`flex items-center justify-center gap-2 px-4 py-2 sm:px-5 sm:py-3 md:px-6 md:py-3 rounded-full transition-all duration-300 hover:scale-105 border border-gray-700 ${platform.hoverColors}`}
           >
-            <span className="text-2xl group-hover:animate-bounce">{platform.icon}</span>
-            <span className="text-xs text-center leading-tight">{platform.name}</span>
+            <span className="text-lg sm:text-xl md:text-2xl group-hover:animate-bounce transition-transform">{platform.icon}</span>
+            <span className="text-xs sm:text-sm md:text-base font-medium whitespace-nowrap">{platform.name}</span>
           </Button>
         </a>
       ))}
