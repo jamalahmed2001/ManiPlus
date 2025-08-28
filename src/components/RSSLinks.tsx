@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button } from './Button'
+import { FaApple, FaSpotify, FaYoutube, FaPatreon, FaRss } from 'react-icons/fa'
 
 interface RSSLinksProps {
   className?: string
@@ -64,7 +65,7 @@ export const RSSLinks: React.FC<RSSLinksProps> = ({
   )
 }
 
-// Dedicated podcast subscribe component with platform-specific links
+// Enhanced podcast subscribe component with engaging design
 export const PodcastSubscribeLinks: React.FC<{ className?: string }> = ({ className = '' }) => {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://thebeatingedge.com'
   const rssUrl = `${baseUrl}/api/feed.xml`
@@ -72,33 +73,53 @@ export const PodcastSubscribeLinks: React.FC<{ className?: string }> = ({ classN
   const platforms = [
     {
       name: 'Apple Podcasts',
-      icon: '🍎',
+      callToAction: 'Listen on iOS',
+      icon: <FaApple className="text-2xl" />,
       url: `https://podcasts.apple.com/podcast/id1234567890`, // Replace with actual Apple Podcasts URL
-      hoverColors: 'hover:text-purple-400 hover:border-purple-400'
+      bgGradient: 'bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900',
+      hoverEffect: 'hover:shadow-2xl hover:shadow-purple-500/30 hover:scale-110',
+      textColor: 'text-white',
+      description: 'Listen on Apple Podcasts for iOS and Mac users'
     },
     {
       name: 'Spotify',
-      icon: '🎵',
+      callToAction: 'Stream anywhere',
+      icon: <FaSpotify className="text-2xl" />,
       url: `https://open.spotify.com/show/1234567890`, // Replace with actual Spotify URL
-      hoverColors: 'hover:text-green-400 hover:border-green-400'
+      bgGradient: 'bg-gradient-to-br from-green-600 to-green-800',
+      hoverEffect: 'hover:shadow-2xl hover:shadow-green-500/30 hover:scale-110',
+      textColor: 'text-white',
+      description: 'Stream on Spotify with millions of other listeners'
     },
     {
       name: 'YouTube',
-      icon: '🎥',
-      url: `https://www.youtube.com/watch?v=dQw4w9WgXcQ`,
-      hoverColors: 'hover:text-red-500 hover:border-red-500'
+      callToAction: 'Watch & listen',
+      icon: <FaYoutube className="text-2xl" />,
+      url: `https://www.youtube.com/watch?v=dQw4w9WgXcQ`, // Replace with actual YouTube URL
+      bgGradient: 'bg-gradient-to-br from-red-600 to-red-800',
+      hoverEffect: 'hover:shadow-2xl hover:shadow-red-500/30 hover:scale-110',
+      textColor: 'text-white',
+      description: 'Watch video episodes on YouTube'
     },
     {
       name: 'Patreon',
-      icon: '💰',
+      callToAction: 'Exclusive content',
+      icon: <FaPatreon className="text-2xl" />,
       url: `https://patreon.com/thebeatingedge`, // Replace with actual Patreon URL
-      hoverColors: 'hover:text-orange-400 hover:border-orange-400'
+      bgGradient: 'bg-gradient-to-br from-orange-500 to-red-600',
+      hoverEffect: 'hover:shadow-2xl hover:shadow-orange-500/30 hover:scale-110',
+      textColor: 'text-white',
+      description: 'Support us on Patreon for exclusive content'
     },
     {
       name: 'RSS Feed',
-      icon: '📡',
+      callToAction: 'Any podcast app',
+      icon: <FaRss className="text-2xl" />,
       url: rssUrl,
-      hoverColors: 'hover:text-gray-300 hover:border-gray-300'
+      bgGradient: 'bg-gradient-to-br from-blue-600 to-blue-800',
+      hoverEffect: 'hover:shadow-2xl hover:shadow-blue-500/30 hover:scale-110',
+      textColor: 'text-white',
+      description: 'Subscribe via RSS for any podcast app'
     }
   ]
 
@@ -110,17 +131,42 @@ export const PodcastSubscribeLinks: React.FC<{ className?: string }> = ({ classN
           href={platform.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="group"
-          title={`Listen on ${platform.name}`}
+          className="group block"
+          title={platform.description}
         >
-          <Button 
-            variant="ghost" 
-            size="md" 
-            className={`flex items-center justify-center gap-2 px-4 py-2 sm:px-5 sm:py-3 md:px-6 md:py-3 rounded-full transition-all duration-300 hover:scale-105 border border-gray-700 ${platform.hoverColors}`}
+          <div 
+            className={`
+              ${platform.bgGradient} 
+              px-6 py-4
+              rounded-2xl 
+              transition-all 
+              duration-300 
+              ${platform.hoverEffect}
+              border-2 
+              border-white/10 
+              hover:border-white/30
+              cursor-pointer
+              relative
+              overflow-hidden
+            `}
           >
-            <span className="text-lg sm:text-xl md:text-2xl group-hover:animate-bounce transition-transform">{platform.icon}</span>
-            <span className="text-xs sm:text-sm md:text-base font-medium whitespace-nowrap">{platform.name}</span>
-          </Button>
+            {/* Shine effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+            
+            <div className="flex items-center justify-center gap-3 relative z-10">
+              <span className={`${platform.textColor} group-hover:animate-pulse`}>
+                {platform.icon}
+              </span>
+              <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+                <span className={`${platform.textColor} font-bold text-sm sm:text-base whitespace-nowrap`}>
+                  {platform.name}
+                </span>
+                <span className={`${platform.textColor} text-xs opacity-90 whitespace-nowrap`}>
+                  {platform.callToAction}
+                </span>
+              </div>
+            </div>
+          </div>
         </a>
       ))}
     </div>

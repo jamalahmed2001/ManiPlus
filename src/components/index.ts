@@ -7,3 +7,4 @@ export { Newsletter } from './Newsletter';
 export { PodcastStructuredData } from './StructuredData';
 export * from './SEO';
 export { RSSLinks, PodcastSubscribeLinks } from './RSSLinks';
+export { SocialLinks, SocialLinksCompact, SocialLinksFull } from './SocialLinks';

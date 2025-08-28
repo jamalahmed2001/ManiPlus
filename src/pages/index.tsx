@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { NextSeo } from "next-seo";
 import Link from "next/link";
 import Image from "next/image";
-import { Header, Section, Card, Button, EpisodeCard, Newsletter, PodcastSubscribeLinks } from '@/components';
+import { Header, Section, Card, Button, EpisodeCard, PodcastSubscribeLinks, SocialLinksFull } from '@/components';
 import { PodcastStructuredData, WebsiteStructuredData, generateHomepageSEO, type Episode } from '@/components/SEO';
 import { episodes as episodeData } from '@/data/episodes';
 
@@ -262,14 +262,23 @@ export default function Home() {
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
                 <span className="text-red-400">Never Miss</span> <span className="text-green-500">A Beat</span>
               </h2>
-              <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+              <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
                 Join others who know that the most important conversations happen in quiet moments — 
                 when hearts learn to listen and stories find their voice.
               </p>
 
-              <PodcastSubscribeLinks className="mb-8" />
+              {/* Podcast Platforms */}
+              <div className="mb-12">
+                <h3 className="text-2xl font-bold text-white mb-4">
+                  <span className="text-red-400">Listen</span> <span className="text-green-500">Everywhere</span>
+                </h3>
+                <PodcastSubscribeLinks />
+              </div>
 
-              <Newsletter />
+              {/* Social & Support */}
+              <SocialLinksFull className="mb-12" />
+
+
             </div>
         </Section>
 
@@ -296,6 +305,7 @@ export default function Home() {
               </button>
               <Link href="/privacy" className="hover:text-gray-200 transition-colors">Privacy</Link>
             </div>
+
             <div className="text-sm text-gray-500 space-y-1">
               <p>
                 © 2024 The Beating Edge with Mani+. All rights reserved.
