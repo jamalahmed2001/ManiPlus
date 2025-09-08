@@ -18,7 +18,7 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
     {
       name: 'Instagram',
       callToAction: 'Follow for behind-the-scenes',
-      url: 'https://instagram.com/thebeatingedge', // Replace with actual Instagram handle
+      url: 'https://www.instagram.com/official_mani.plus/', // Replace with actual Instagram handle
       icon: <FaInstagram className="text-2xl" />,
       bgGradient: 'bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400',
       hoverEffect: 'hover:shadow-2xl hover:shadow-pink-500/30 hover:scale-110',
@@ -28,7 +28,7 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
     {
       name: 'TikTok',
       callToAction: 'Quick health tips & stories',
-      url: 'https://tiktok.com/@thebeatingedge', // Replace with actual TikTok handle
+      url: 'https://www.tiktok.com/@mani.plus1', // Replace with actual TikTok handle
       icon: <FaTiktok className="text-2xl" />,
       bgGradient: 'bg-gradient-to-br from-black to-gray-900',
       hoverEffect: 'hover:shadow-2xl hover:shadow-white/30 hover:scale-110 hover:bg-gradient-to-br hover:from-gray-900 hover:to-black',
