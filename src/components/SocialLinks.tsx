@@ -38,7 +38,7 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
     {
       name: 'Buy Me a Coffee',
       callToAction: 'Support the podcast ☕',
-      url: 'https://buymeacoffee.com/thebeatingedge', // Replace with actual Buy Me a Coffee username
+      url: 'https://buymeacoffee.com/maniplus', // Replace with actual Buy Me a Coffee username
       icon: <FaCoffee className="text-2xl" />,
       bgGradient: 'bg-gradient-to-br from-yellow-600 to-orange-500',
       hoverEffect: 'hover:shadow-2xl hover:shadow-yellow-500/30 hover:scale-110',

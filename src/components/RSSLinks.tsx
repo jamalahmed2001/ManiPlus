@@ -85,7 +85,7 @@ export const PodcastSubscribeLinks: React.FC<{ className?: string }> = ({ classN
       name: 'Spotify',
       callToAction: 'Stream anywhere',
       icon: <FaSpotify className="text-2xl" />,
-      url: `https://open.spotify.com/show/1234567890`, // Replace with actual Spotify URL
+      url: `https://open.spotify.com/user/31nofkmor4e5eqcziuggaovouioy`, // Replace with actual Spotify URL
       bgGradient: 'bg-gradient-to-br from-green-600 to-green-800',
       hoverEffect: 'hover:shadow-2xl hover:shadow-green-500/30 hover:scale-110',
       textColor: 'text-white',
@@ -95,7 +95,7 @@ export const PodcastSubscribeLinks: React.FC<{ className?: string }> = ({ classN
       name: 'YouTube',
       callToAction: 'Watch & listen',
       icon: <FaYoutube className="text-2xl" />,
-      url: `https://www.youtube.com/watch?v=dQw4w9WgXcQ`, // Replace with actual YouTube URL
+      url: `https://www.youtube.com/@Mani-Plus`, // Replace with actual YouTube URL
       bgGradient: 'bg-gradient-to-br from-red-600 to-red-800',
       hoverEffect: 'hover:shadow-2xl hover:shadow-red-500/30 hover:scale-110',
       textColor: 'text-white',
@@ -105,7 +105,7 @@ export const PodcastSubscribeLinks: React.FC<{ className?: string }> = ({ classN
       name: 'Patreon',
       callToAction: 'Exclusive content',
       icon: <FaPatreon className="text-2xl" />,
-      url: `https://patreon.com/thebeatingedge`, // Replace with actual Patreon URL
+      url: `https://www.patreon.com/c/ManiPlus`, // Replace with actual Patreon URL
       bgGradient: 'bg-gradient-to-br from-orange-500 to-red-600',
       hoverEffect: 'hover:shadow-2xl hover:shadow-orange-500/30 hover:scale-110',
       textColor: 'text-white',
