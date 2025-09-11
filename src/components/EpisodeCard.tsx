@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from './Button';
+import { AudioPlayer } from './AudioPlayer';
 import { Card } from './Card';
 
 interface Episode {
@@ -10,11 +10,12 @@ interface Episode {
   releaseDate: string;
   episodeNumber: string;
   color: 'red' | 'green' | 'white';
+  audioUrl?: string;
 }
 
 interface EpisodeCardProps {
   episode: Episode;
-  onPlay: (episodeId: string) => void;
+  onPlay?: (episodeId: string) => void;
   isPlaying?: boolean;
 }
 
@@ -23,15 +24,6 @@ export const EpisodeCard: React.FC<EpisodeCardProps> = ({
   onPlay,
   isPlaying = false
 }) => {
-  const getButtonVariant = (color: string) => {
-    switch (color) {
-      case 'red': return 'primary';
-      case 'green': return 'secondary';
-      case 'white': return 'ghost';
-      default: return 'primary';
-    }
-  };
-
   const getTitleHoverColor = (color: string) => {
     switch (color) {
       case 'red': return 'group-hover:text-red-400';
@@ -43,8 +35,9 @@ export const EpisodeCard: React.FC<EpisodeCardProps> = ({
 
   return (
     <Card variant="hover" borderColor={episode.color}>
-      <div className="flex flex-col md:flex-row md:items-center gap-4">
-        <div className="flex-1">
+      <div className="space-y-4">
+        {/* Episode Info */}
+        <div>
           <h3 className={`text-xl font-bold text-white mb-2 transition-colors ${getTitleHoverColor(episode.color)}`}>
             {episode.episodeNumber}: {episode.title}
           </h3>
@@ -55,15 +48,17 @@ export const EpisodeCard: React.FC<EpisodeCardProps> = ({
             {episode.duration} • Released {episode.releaseDate}
           </div>
         </div>
-        <Button
-          variant={getButtonVariant(episode.color)}
-          onClick={() => onPlay(episode.id)}
-          disabled={isPlaying}
-          isLoading={isPlaying}
-          icon={!isPlaying ? "▶" : undefined}
-        >
-          {isPlaying ? 'Playing...' : 'Play'}
-        </Button>
+
+        {/* Audio Player */}
+        {episode.audioUrl && (
+          <AudioPlayer 
+            src={episode.audioUrl}
+            title={`${episode.episodeNumber}: ${episode.title}`}
+            variant={episode.color}
+            compact={true}
+            className="mt-4"
+          />
+        )}
       </div>
     </Card>
   );

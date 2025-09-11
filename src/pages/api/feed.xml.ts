@@ -9,8 +9,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     res.setHeader('Content-Type', 'application/rss+xml; charset=utf-8')
     res.setHeader('X-Robots-Tag', 'noindex, follow')
     
-    // Episodes are imported from centralized data source
-    const rssFeed = generateRSSFeed(episodes)
+    // Only include the first episode (Mani+.mp3) in RSS feed
+    const rssEpisodes = episodes.filter(episode => episode.id === '1')
+    const rssFeed = generateRSSFeed(rssEpisodes)
     
     res.status(200).send(rssFeed)
   } catch (error) {

@@ -1,3 +1,4 @@
+export { AudioPlayer } from './AudioPlayer';
 export { Button } from './Button';
 export { Card } from './Card';
 export { Section } from './Section';

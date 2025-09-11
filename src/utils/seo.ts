@@ -46,6 +46,7 @@ export interface Episode {
   guests?: string[]
   topics?: string[]
   keywords?: string[]
+  audioUrl?: string
 }
 
 // Generate comprehensive SEO for homepage

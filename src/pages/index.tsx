@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Header, Section, Card, Button, EpisodeCard, PodcastSubscribeLinks, SocialLinksFull } from '@/components';
 import { PodcastStructuredData, WebsiteStructuredData, generateHomepageSEO, type Episode } from '@/components/SEO';
-import { episodes as episodeData } from '@/data/episodes';
+import { introEpisodes as episodeData } from '@/data/episodes';
 
 export default function Home() {
   const [isVisible, setIsVisible] = useState(false);
@@ -18,7 +18,7 @@ export default function Home() {
     
     // Animate stats counter
     const timer = setTimeout(() => {
-      setStatsCounter({ episodes: 25, listeners: 10000, countries: 45 });
+      setStatsCounter({ episodes: 4, listeners: 10000, countries: 45 });
     }, 1000);
 
     // Handle hash-based navigation
@@ -238,11 +238,14 @@ export default function Home() {
           </div>
         </Section>
 
-        {/* Latest Episodes Section */}
+        {/* Episode Overviews Section */}
         <Section background="gradient-gray" id="episodes">
             <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
-              <span className="text-red-400">Latest</span> <span className="text-green-500">Episodes</span>
+              <span className="text-red-400">Episode</span> <span className="text-green-500">Overviews</span>
             </h2>
+            <p className="text-xl text-gray-400 text-center mb-12 max-w-3xl mx-auto">
+              Start your journey with Mani+ through these introductory episodes that set the foundation for The Beating Edge experience
+            </p>
 
             <div className="space-y-6">
               {episodes.map((episode) => (
