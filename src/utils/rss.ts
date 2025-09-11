@@ -89,7 +89,7 @@ export const getFileSize = (audioUrl: string): number => {
     '/podcasts/mani+2.mp3': 7879896, 
     '/podcasts/Mani+3.mp3': 6046664
   }
-  return fileSizes[audioUrl] || 0
+  return fileSizes[audioUrl] ?? 0
 }
 
 // Get MIME type from audio URL
@@ -143,7 +143,7 @@ export const generateRSSFeed = (episodes: Episode[]): string => {
     .sort((a, b) => new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime())
     .forEach((episode) => {
       const episodeUrl = `${siteConfig.siteUrl}/episodes/${episode.slug ?? episode.id}`
-      const { seconds, formatted } = formatDuration(episode.duration)
+      // Duration formatting handled elsewhere in the function
       
       // Prepare enclosure data for podcast
       let enclosure = undefined
@@ -210,7 +210,7 @@ export const generateRSSFeed = (episodes: Episode[]): string => {
     </itunes:owner>
     <itunes:image href="${podcastConfig.imageUrl}"/>
     <itunes:category text="${podcastConfig.category[0]}">
-        <itunes:category text="${podcastConfig.category[1]?.split(':')[1] || 'Medicine'}"/>
+        <itunes:category text="${podcastConfig.category[1]?.split(':')[1] ?? 'Medicine'}"/>
     </itunes:category>
     <itunes:explicit>${podcastConfig.explicit ? 'yes' : 'no'}</itunes:explicit>
     <itunes:keywords>healthcare, medicine, heart transplant, dialysis, patient stories, medical podcast</itunes:keywords>`
@@ -222,7 +222,7 @@ export const generateRSSFeed = (episodes: Episode[]): string => {
   
   // Fix enclosures and add iTunes episode-level metadata
   episodes.forEach((episode) => {
-    const { seconds, formatted } = formatDuration(episode.duration)
+    const { formatted } = formatDuration(episode.duration)
     const episodeNumber = parseInt(episode.episodeNumber.replace(/\D/g, ''))
     
     const iTunesItemTags = `

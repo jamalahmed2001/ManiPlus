@@ -21,8 +21,8 @@ interface EpisodeCardProps {
 
 export const EpisodeCard: React.FC<EpisodeCardProps> = ({
   episode,
-  onPlay,
-  isPlaying = false
+  onPlay: _onPlay,
+  isPlaying: _isPlaying = false
 }) => {
   const getTitleHoverColor = (color: string) => {
     switch (color) {
