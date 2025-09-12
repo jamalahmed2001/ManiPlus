@@ -6,7 +6,8 @@ export {
   SocialProfileStructuredData,
   OrganizationStructuredData,
   BreadcrumbStructuredData,
-  EpisodeStructuredData
+  EpisodeStructuredData,
+  FAQStructuredData
 } from './EnhancedStructuredData'
 
 // Re-export SEO utilities

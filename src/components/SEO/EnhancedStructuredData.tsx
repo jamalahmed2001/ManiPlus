@@ -5,7 +5,8 @@ import {
   SocialProfileJsonLd,
   WebPageJsonLd,
   SiteLinksSearchBoxJsonLd,
-  OrganizationJsonLd
+  OrganizationJsonLd,
+  FAQPageJsonLd
 } from 'next-seo'
 import { siteConfig, type Episode } from '@/utils/seo'
 
@@ -127,7 +128,7 @@ export const PodcastStructuredData: React.FC<PodcastEpisodeStructuredDataProps> 
       "width": 400,
       "height": 400
     },
-    "description": "A podcast dedicated to sharing stories of resilience, medical innovation, and the human spirit in healthcare",
+    "description": "Resilience, medicine, innovation, and the human spirit in healthcare — stories that move, insights that matter.",
     "foundingDate": "2024-01-01",
     "founder": {
       "@type": "Person",
@@ -164,7 +165,7 @@ export const PodcastStructuredData: React.FC<PodcastEpisodeStructuredDataProps> 
     "name": siteConfig.siteName,
     "alternateName": "The Beating Edge",
     "url": siteConfig.siteUrl,
-    "description": "Transformative healthcare stories and medical insights from patients, doctors, and healthcare professionals",
+    "description": "Resilience in healthcare, medicine and innovation — human stories from patients, clinicians, and researchers.",
     "inLanguage": "en-US",
     "isAccessibleForFree": true,
     "isFamilyFriendly": true,
@@ -209,6 +210,32 @@ export const PodcastStructuredData: React.FC<PodcastEpisodeStructuredDataProps> 
         }}
       />
     </>
+  )
+}
+
+// FAQ structured data for improved topical authority
+export const FAQStructuredData: React.FC = () => {
+  return (
+    <FAQPageJsonLd
+      mainEntity={[
+        {
+          questionName: 'What is The Beating Edge with Mani+ about?',
+          acceptedAnswerText: 'A podcast exploring resilience, medicine, innovation, and the human spirit in healthcare through authentic patient stories and clinician insights.'
+        },
+        {
+          questionName: 'Who should listen to this medical podcast?',
+          acceptedAnswerText: 'Patients, caregivers, clinicians, researchers, and anyone interested in practical wisdom, medical breakthroughs, and human-centered healthcare.'
+        },
+        {
+          questionName: 'Do you cover medical innovation and research?',
+          acceptedAnswerText: 'Yes. We feature clinicians and researchers discussing evidence-based advances, transplant care, immunosuppression, and patient-centered innovation.'
+        },
+        {
+          questionName: 'Are transcripts available for accessibility?',
+          acceptedAnswerText: 'Where available, we link episode transcripts to improve accessibility and SEO; we are expanding transcript coverage over time.'
+        }
+      ]}
+    />
   )
 }
 

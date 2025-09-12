@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { Button } from './Button';
 import { cn } from '@/utils/cn';
@@ -50,11 +51,15 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-red-500 to-green-500 rounded-full flex items-center justify-center">
-              <span className="text-black font-bold text-sm">M+</span>
-            </div>
-            <span className="font-bold text-white hidden sm:block">
+          <Link href="/" className="flex items-center gap-3">
+            <Image 
+              src="/mani+logo.png" 
+              width={120}
+              height={60}
+              alt="The Beating Edge with Mani+ Logo" 
+              className="h-8 w-auto drop-shadow-lg hover:scale-105 transition-transform duration-300"
+            />
+            <span className="font-bold text-white hidden lg:block">
               <span className="text-red-400">The Beating Edge</span>{' '}
               <span className="text-gray-400">with</span>{' '}
               <span className="text-green-500">Mani+</span>

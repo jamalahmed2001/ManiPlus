@@ -55,7 +55,7 @@ export const podcastConfig: PodcastRSSConfig = {
   },
   category: [
     'Health & Fitness',
-    'Medicine',
+    'Health & Fitness:Medicine',
     'Health & Fitness:Alternative Health',
     'Society & Culture:Personal Journals',
     'Education:How To'
@@ -213,7 +213,7 @@ export const generateRSSFeed = (episodes: Episode[]): string => {
         <itunes:category text="${podcastConfig.category[1]?.split(':')[1] ?? 'Medicine'}"/>
     </itunes:category>
     <itunes:explicit>${podcastConfig.explicit ? 'yes' : 'no'}</itunes:explicit>
-    <itunes:keywords>healthcare, medicine, heart transplant, dialysis, patient stories, medical podcast</itunes:keywords>`
+    <itunes:keywords>resilience, medicine, innovation, human spirit, healthcare, heart transplant, dialysis, patient stories, medical podcast</itunes:keywords>`
   
   rssContent = rssContent.replace(
     /<\/copyright>/,

@@ -45,8 +45,7 @@ export default function Story() {
                 <span className="text-green-400">Story</span>
               </h1>
               <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-                The raw, unfiltered journey from heart failure to transplant recipient to dialysis patient — 
-                and how these experiences shaped a mission to amplify the voices that matter most in healthcare.
+                A raw journey through heart failure, transplant, and dialysis — and how resilience, medicine, and innovation revealed the human spirit in healthcare. This mission is to amplify voices at the bedside and at the bench.
               </p>
             </div>
             <div className="relative">
@@ -276,8 +275,8 @@ export default function Story() {
         <Section background="black" className="py-12">
           <div className="max-w-3xl mx-auto text-center">
             <p className="text-gray-400 italic">
-              &quot;Every heartbeat carries a story. Every story deserves to be heard. 
-              Every voice has the power to heal — both the speaker and the listener.&quot;
+              &quot;Where resilience meets medicine, innovation serves humanity, and the human spirit transforms healthcare. 
+              Every conversation advances care. Every story builds understanding.&quot;
             </p>
             <p className="text-gray-500 mt-4">— Mani+</p>
           </div>

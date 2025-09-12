@@ -3,6 +3,8 @@ import Head from 'next/head';
 import { Header, Section, Card, Button } from '@/components';
 import Link from 'next/link';
 
+const CONTACT_EMAIL = 'info@mani.plus';
+
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
@@ -42,12 +44,34 @@ export default function Contact() {
     }
 
     try {
-      // TODO: Implement actual form submission API
-      await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate API call
-      
-      setIsSubmitted(true);
+      const typeLabelMap: Record<string, string> = {
+        general: 'General Inquiry',
+        guest: 'Guest Application',
+        professional: 'Professional Inquiry',
+        partnership: 'Partnership/Collaboration',
+        feedback: 'Feedback/Suggestions',
+        media: 'Media/Press Inquiry'
+      };
+      const typeLabel = typeLabelMap[formData.type] ?? 'General Inquiry';
+
+      const subject = formData.subject?.trim()
+        ? formData.subject.trim()
+        : `Contact: ${typeLabel}`;
+
+      const bodyLines = [
+        `Name: ${formData.name}`,
+        `Email: ${formData.email}`,
+        `Type: ${typeLabel}`,
+        '',
+        formData.message
+      ];
+
+      const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
+      if (typeof window !== 'undefined') {
+        window.location.href = mailto;
+      }
     } catch {
-      setError('Something went wrong. Please try again.');
+      setError(`Unable to open your email client. Please email ${CONTACT_EMAIL} directly.`);
     } finally {
       setIsLoading(false);
     }

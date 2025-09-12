@@ -4,32 +4,32 @@ import type { NextSeoProps, ArticleJsonLdProps } from 'next-seo'
 export const siteConfig = {
   siteName: 'The Beating Edge with Mani+',
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://thebeatingedge.com',
-  description: 'Raw, honest conversations about life after heart transplant, kidney failure, and the resilience of the human spirit. Join Mani+, a heart transplant recipient and dialysis patient, for powerful conversations with doctors, researchers, and fellow patients.',
+  description: 'A podcast at the intersection of resilience, medicine, innovation, and the human spirit in healthcare. Raw, honest conversations with patients, clinicians, and researchers about heart transplant, dialysis, and breakthroughs that change lives.',
   author: 'Mani+',
   twitter: '@thebeatingedge',
   locale: 'en_US',
   defaultImage: '/mani+logo.png',
   keywords: [
+    'resilience in healthcare',
+    'medicine podcast',
+    'medical innovation podcast',
+    'human spirit in healthcare',
+    'healthcare resilience stories',
+    'patient stories medicine',
     'heart transplant podcast',
-    'dialysis stories', 
-    'medical podcast',
-    'healthcare stories',
+    'dialysis patient stories',
+    'healthcare innovation',
+    'medical breakthroughs',
     'patient advocacy',
-    'transplant recipient',
-    'chronic illness',
-    'medical innovation',
-    'healthcare professionals',
-    'patient journey',
-    'organ transplant',
-    'kidney failure',
-    'medical research',
-    'health podcast',
-    'medical storytelling',
-    'patient experience',
-    'healthcare insights',
-    'medical community',
-    'health advocacy',
-    'medical resilience'
+    'organ transplant stories',
+    'kidney failure support',
+    'medical research podcast',
+    'healthcare storytelling',
+    'patient experience podcast',
+    'healthcare insights podcast',
+    'clinical innovation',
+    'medical community voices',
+    'health advocacy podcast'
   ]
 }
 
@@ -52,7 +52,7 @@ export interface Episode {
 // Generate comprehensive SEO for homepage
 export const generateHomepageSEO = (): NextSeoProps => {
   return {
-    title: `${siteConfig.siteName} | Transformative Healthcare Stories & Medical Insights`,
+    title: `${siteConfig.siteName} | Resilience, Medicine, Innovation & Human Spirit`,
     description: siteConfig.description,
     canonical: siteConfig.siteUrl,
     languageAlternates: [
@@ -66,8 +66,8 @@ export const generateHomepageSEO = (): NextSeoProps => {
       locale: siteConfig.locale,
       url: siteConfig.siteUrl,
       siteName: siteConfig.siteName,
-      title: `${siteConfig.siteName} | Healthcare Stories That Transform Lives`,
-      description: 'The conversations that happen in hospital rooms, dialysis chairs, and the quiet moments when everything changes. Where medicine meets the stories we don\'t always tell.',
+      title: `${siteConfig.siteName} | Resilience, Medicine, Innovation & Human Spirit`,
+      description: 'Resilience in healthcare, medicine, and innovation — human stories from patients and clinicians at the beating edge of care.',
       images: [
         {
           url: `${siteConfig.siteUrl}${siteConfig.defaultImage}`,
@@ -102,6 +102,10 @@ export const generateHomepageSEO = (): NextSeoProps => {
       {
         name: 'author',
         content: siteConfig.author
+      },
+      {
+        name: 'keywords',
+        content: siteConfig.keywords.join(', ')
       },
       {
         name: 'publisher',
@@ -290,15 +294,15 @@ export const generateStoryPageSEO = (): NextSeoProps => {
   
   return {
     title: `Mani+'s Story | ${siteConfig.siteName}`,
-    description: 'The personal journey of Mani+, a heart transplant recipient and dialysis patient, sharing his story of resilience, medical challenges, and the human spirit in healthcare.',
+    description: 'Resilience, medicine, innovation, and the human spirit in healthcare — the personal journey of Mani+, from heart failure to transplant to dialysis.',
     canonical: pageUrl,
     openGraph: {
       type: 'article',
       locale: siteConfig.locale,
       url: pageUrl,
       siteName: siteConfig.siteName,
-      title: `Mani+'s Story - A Journey Through Heart Transplant and Dialysis`,
-      description: 'From heart failure to transplant recipient to dialysis patient - the raw, honest story of resilience and hope in the face of medical challenges.',
+      title: `Mani+'s Story - Resilience, Medicine, Innovation & Human Spirit`,
+      description: 'From heart failure to transplant to dialysis — an honest story about medical resilience, clinical realities, and the human spirit in healthcare.',
       images: [
         {
           url: `${siteConfig.siteUrl}${siteConfig.defaultImage}`,
@@ -322,7 +326,7 @@ export const generateStoryPageSEO = (): NextSeoProps => {
     additionalMetaTags: [
       {
         name: 'keywords',
-        content: 'heart transplant story, dialysis patient experience, medical journey, patient advocacy, healthcare resilience, transplant recipient, chronic illness story'
+        content: 'resilience in healthcare, medicine, medical innovation, human spirit, heart transplant story, dialysis journey, patient advocacy, healthcare storytelling'
       },
       {
         name: 'author',

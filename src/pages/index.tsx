@@ -4,7 +4,7 @@ import { NextSeo } from "next-seo";
 import Link from "next/link";
 import Image from "next/image";
 import { Header, Section, Card, Button, EpisodeCard, PodcastSubscribeLinks, SocialLinksFull } from '@/components';
-import { PodcastStructuredData, WebsiteStructuredData, generateHomepageSEO, type Episode } from '@/components/SEO';
+import { PodcastStructuredData, WebsiteStructuredData, FAQStructuredData, generateHomepageSEO, type Episode } from '@/components/SEO';
 import { introEpisodes as episodeData } from '@/data/episodes';
 
 export default function Home() {
@@ -78,6 +78,7 @@ export default function Home() {
       
       <PodcastStructuredData episodes={episodes} />
       <WebsiteStructuredData />
+      <FAQStructuredData />
 
       <Header />
 
@@ -104,11 +105,11 @@ export default function Home() {
             </div>
 
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-light mb-6 leading-tight">
-              <span className="text-white drop-shadow-xl">When Hearts Whisper, We Listen</span>
+              <span className="text-white drop-shadow-xl">Resilience. Medicine. Innovation. The Human Spirit.</span>
             </h1>
 
             <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-8 leading-relaxed">
-              The conversations that happen in hospital rooms, dialysis chairs, and the quiet moments when everything changes. This is where medicine meets the stories we don&apos;t always tell.
+              Conversations at the intersection of healthcare resilience, cutting-edge medicine, and human-centered innovation — where real patient stories and clinician insights meet.
             </p>
 
             {/* Stats */}
@@ -263,7 +264,7 @@ export default function Home() {
         <Section background="gradient-red-green" id="subscribe">
             <div className="text-center">
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                <span className="text-red-400">Never Miss</span> <span className="text-green-500">A Beat</span>
+                <span className="text-red-400">Subscribe for</span> <span className="text-green-500">Healthcare Resilience & Innovation</span>
               </h2>
               <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
                 Join others who know that the most important conversations happen in quiet moments — 
@@ -285,6 +286,29 @@ export default function Home() {
             </div>
         </Section>
 
+        {/* FAQ Section */}
+        <Section background="black" id="faq">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-4xl md:text-5xl font-bold text-center mb-6">
+                <span className="text-red-400">Your Questions,</span> <span className="text-green-500">Answered</span>
+              </h2>
+              <div className="space-y-4">
+                <Card className="p-6">
+                  <h3 className="text-xl font-semibold mb-2">What is this podcast about?</h3>
+                  <p className="text-gray-300">Resilience, medicine, innovation, and the human spirit in healthcare — through authentic patient stories and clinician insights.</p>
+                </Card>
+                <Card className="p-6">
+                  <h3 className="text-xl font-semibold mb-2">Who is it for?</h3>
+                  <p className="text-gray-300">Patients, caregivers, clinicians, researchers, and anyone who believes in human-centered healthcare and evidence-based progress.</p>
+                </Card>
+                <Card className="p-6">
+                  <h3 className="text-xl font-semibold mb-2">Do you cover medical innovation?</h3>
+                  <p className="text-gray-300">Yes — we explore evidence-based advances in transplant care, immunosuppression, dialysis, and more.</p>
+                </Card>
+              </div>
+            </div>
+        </Section>
+
         {/* Footer */}
         <footer className="bg-black py-12 border-t border-gray-800">
           <div className="max-w-6xl mx-auto px-4 text-center">
@@ -294,8 +318,8 @@ export default function Home() {
               </h3>
             </div>
             <p className="text-gray-400 mb-6 max-w-2xl mx-auto">
-              For the whispered fears in waiting rooms, the courage found in unexpected places, and the wisdom that emerges when hearts learn to listen.
-              Every heartbeat carries a story. Every story deserves to be heard.
+              Where resilience meets medicine, innovation serves humanity, and the human spirit transforms healthcare.
+              Every conversation advances care. Every story builds understanding.
             </p>
             <div className="flex justify-center space-x-6 text-gray-400 mb-6">
               <Link href="/contact" className="hover:text-red-400 transition-colors">Contact</Link>

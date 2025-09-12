@@ -175,14 +175,14 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({
           aria-label={isPlaying ? 'Pause' : 'Play'}
         >
           {isLoading ? (
-            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+            <div className={`w-4 h-4 border-2 ${variant === 'white' ? 'border-black border-t-transparent' : 'border-white border-t-transparent'} rounded-full animate-spin`}></div>
           ) : isPlaying ? (
-            <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <svg className={`w-4 h-4 ${variant === 'white' ? 'text-black' : 'text-white'}`} fill="currentColor" viewBox="0 0 24 24">
               <rect x="6" y="4" width="4" height="16" rx="1"/>
               <rect x="14" y="4" width="4" height="16" rx="1"/>
             </svg>
           ) : (
-            <svg className="w-4 h-4 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+            <svg className={`w-4 h-4 ${variant === 'white' ? 'text-black' : 'text-white'} ml-0.5`} fill="currentColor" viewBox="0 0 24 24">
               <path d="M8 5v14l11-7z"/>
             </svg>
           )}
@@ -240,14 +240,14 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({
           aria-label={isPlaying ? 'Pause' : 'Play'}
         >
           {isLoading ? (
-            <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+            <div className={`w-6 h-6 border-2 ${variant === 'white' ? 'border-black border-t-transparent' : 'border-white border-t-transparent'} rounded-full animate-spin`}></div>
           ) : isPlaying ? (
-            <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <svg className={`w-6 h-6 ${variant === 'white' ? 'text-black' : 'text-white'}`} fill="currentColor" viewBox="0 0 24 24">
               <rect x="6" y="4" width="4" height="16" rx="1"/>
               <rect x="14" y="4" width="4" height="16" rx="1"/>
             </svg>
           ) : (
-            <svg className="w-6 h-6 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+            <svg className={`w-6 h-6 ${variant === 'white' ? 'text-black' : 'text-white'} ml-0.5`} fill="currentColor" viewBox="0 0 24 24">
               <path d="M8 5v14l11-7z"/>
             </svg>
           )}

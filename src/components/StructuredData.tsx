@@ -19,7 +19,7 @@ export const PodcastStructuredData: React.FC<PodcastStructuredDataProps> = ({ ep
     "@context": "https://schema.org",
     "@type": "PodcastSeries",
     "name": "The Beating Edge with Mani+",
-    "description": "Raw, honest conversations about life after heart transplant, kidney failure, and the resilience of the human spirit. Join Mani+, a heart transplant recipient and dialysis patient, for powerful conversations with doctors, researchers, and fellow patients sharing breakthrough treatments, inspiring recovery stories, and the human side of modern medicine.",
+    "description": "Resilience, medicine, innovation, and the human spirit in healthcare. Honest conversations with patients, clinicians, and researchers about transplant care, dialysis, breakthroughs, and the human side of modern medicine.",
     "url": "https://thebeatingedge.com",
     "image": "https://thebeatingedge.com/mani+logo.png",
     "author": {
@@ -59,7 +59,7 @@ export const PodcastStructuredData: React.FC<PodcastStructuredDataProps> = ({ ep
     "name": "The Beating Edge with Mani+",
     "url": "https://thebeatingedge.com",
     "logo": "https://thebeatingedge.com/mani+logo.png",
-    "description": "A podcast dedicated to sharing stories of resilience, medical innovation, and the human spirit in healthcare",
+    "description": "Resilience, medicine, innovation, and the human spirit in healthcare — stories that move, insights that matter.",
     "founder": {
       "@type": "Person",
       "name": "Mani+",
@@ -75,7 +75,7 @@ export const PodcastStructuredData: React.FC<PodcastStructuredDataProps> = ({ ep
     "@type": "WebSite",
     "name": "The Beating Edge with Mani+",
     "url": "https://thebeatingedge.com",
-    "description": "Transformative healthcare stories and medical insights from patients, doctors, and healthcare professionals",
+    "description": "Resilience in healthcare, medicine and innovation — human stories from patients, clinicians, and researchers.",
     "publisher": {
       "@type": "Organization",
       "name": "The Beating Edge"
