@@ -75,7 +75,7 @@ export const PodcastSubscribeLinks: React.FC<{ className?: string }> = ({ classN
       name: 'Apple Podcasts',
       callToAction: 'Listen on iOS',
       icon: <FaApple className="text-2xl" />,
-      url: `https://podcasts.apple.com/podcast/id1234567890`, // Replace with actual Apple Podcasts URL
+      url: `https://podcasts.apple.com/us/podcast/mani-plus/id1835622695`,
       bgGradient: 'bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900',
       hoverEffect: 'hover:shadow-2xl hover:shadow-purple-500/30 hover:scale-110',
       textColor: 'text-white',
@@ -85,7 +85,7 @@ export const PodcastSubscribeLinks: React.FC<{ className?: string }> = ({ classN
       name: 'Spotify',
       callToAction: 'Stream anywhere',
       icon: <FaSpotify className="text-2xl" />,
-      url: `https://open.spotify.com/user/31nofkmor4e5eqcziuggaovouioy`, // Replace with actual Spotify URL
+      url: `https://open.spotify.com/show/4ICpM5YIPlvPMM2FpOHAkJ`,
       bgGradient: 'bg-gradient-to-br from-green-600 to-green-800',
       hoverEffect: 'hover:shadow-2xl hover:shadow-green-500/30 hover:scale-110',
       textColor: 'text-white',
