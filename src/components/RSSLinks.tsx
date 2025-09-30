@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from './Button'
-import { FaApple, FaSpotify, FaYoutube, FaPatreon, FaRss } from 'react-icons/fa'
+import { FaApple, FaSpotify, FaYoutube, FaPatreon, FaRss, FaAmazon } from 'react-icons/fa'
 
 interface RSSLinksProps {
   className?: string
@@ -100,6 +100,16 @@ export const PodcastSubscribeLinks: React.FC<{ className?: string }> = ({ classN
       hoverEffect: 'hover:shadow-2xl hover:shadow-red-500/30 hover:scale-110',
       textColor: 'text-white',
       description: 'Watch video episodes on YouTube'
+    },
+    {
+      name: 'Prime Music',
+      callToAction: 'Prime members',
+      icon: <FaAmazon className="text-2xl" />,
+      url: `https://music.amazon.co.uk/podcasts/0d545526-333f-4184-a5b9-3b8b0064a391/maniplus`,
+      bgGradient: 'bg-gradient-to-br from-blue-500 to-blue-700',
+      hoverEffect: 'hover:shadow-2xl hover:shadow-orange-500/30 hover:scale-110',
+      textColor: 'text-white',
+      description: 'Listen on Amazon Prime Music'
     },
     {
       name: 'Patreon',
