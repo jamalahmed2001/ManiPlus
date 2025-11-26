@@ -1,5 +1,4 @@
 import React from 'react'
-import { Button } from './Button'
 import { FaApple, FaSpotify, FaYoutube, FaPatreon, FaRss, FaAmazon } from 'react-icons/fa'
 
 interface RSSLinksProps {
@@ -9,66 +8,16 @@ interface RSSLinksProps {
 }
 
 export const RSSLinks: React.FC<RSSLinksProps> = ({ 
-  className = '', 
-  variant = 'horizontal',
-  showLabels = true 
+  className: _className = '', 
+  variant: _variant = 'horizontal',
+  showLabels: _showLabels = true 
 }) => {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://thebeatingedge.com'
-  
-  const feeds = [
-    {
-      name: 'RSS Feed',
-      url: `${baseUrl}/api/feed.xml`,
-      icon: '📡',
-      description: 'RSS 2.0 feed for podcast apps'
-    },
-    {
-      name: 'Atom Feed', 
-      url: `${baseUrl}/api/atom.xml`,
-      icon: '⚛️',
-      description: 'Atom feed for modern feed readers'
-    },
-    {
-      name: 'JSON Feed',
-      url: `${baseUrl}/api/feed.json`,
-      icon: '📋',
-      description: 'JSON feed for web applications'
-    }
-  ]
-
-  const containerClass = variant === 'horizontal' 
-    ? 'flex flex-wrap gap-3 justify-center'
-    : 'flex flex-col gap-2'
-
-  return (
-    <div className={`${containerClass} ${className}`}>
-      {feeds.map((feed) => (
-        <a 
-          key={feed.name}
-          href={feed.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group"
-          title={feed.description}
-        >
-          <Button 
-            variant="ghost" 
-            size="sm" 
-            className="flex items-center gap-2 transition-all duration-300 hover:scale-105"
-          >
-            <span className="group-hover:animate-pulse">{feed.icon}</span>
-            {showLabels && <span>{feed.name}</span>}
-          </Button>
-        </a>
-      ))}
-    </div>
-  )
+  return null;
 }
 
 // Enhanced podcast subscribe component with engaging design
 export const PodcastSubscribeLinks: React.FC<{ className?: string }> = ({ className = '' }) => {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://thebeatingedge.com'
-  const rssUrl = `${baseUrl}/api/feed.xml`
+  const rssUrl = 'https://anchor.fm/s/108b17084/podcast/rss'
   
   const platforms = [
     {
@@ -95,7 +44,7 @@ export const PodcastSubscribeLinks: React.FC<{ className?: string }> = ({ classN
       name: 'YouTube',
       callToAction: 'Watch & listen',
       icon: <FaYoutube className="text-2xl" />,
-      url: `https://www.youtube.com/@Mani-Plus`, // Replace with actual YouTube URL
+      url: `https://www.youtube.com/@TheBeatingEdgeWithMani`,
       bgGradient: 'bg-gradient-to-br from-red-600 to-red-800',
       hoverEffect: 'hover:shadow-2xl hover:shadow-red-500/30 hover:scale-110',
       textColor: 'text-white',

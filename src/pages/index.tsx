@@ -3,29 +3,63 @@ import { useRouter } from "next/router";
 import { NextSeo } from "next-seo";
 import Link from "next/link";
 import Image from "next/image";
-import { Header, Section, Card, Button, EpisodeCard, PodcastSubscribeLinks, SocialLinksFull } from '@/components';
+import type { GetStaticProps } from 'next';
+import { Header, Section, Card, Button, EpisodeCard, PodcastSubscribeLinks, SocialLinksFull, AudioPlayer, EpisodeModal } from '@/components';
 import { PodcastStructuredData, WebsiteStructuredData, FAQStructuredData, generateHomepageSEO, type Episode } from '@/components/SEO';
-import { introEpisodes as episodeData } from '@/data/episodes';
+import { episodes as fallbackEpisodes } from '@/data/episodes';
+import { fetchRSSFeed, sortEpisodesByDate } from '@/utils/rss-fetcher';
 
-export default function Home() {
+interface HomeProps {
+  initialEpisodes: Episode[];
+  episodeCount: number;
+}
+
+export default function Home({ initialEpisodes, episodeCount }: HomeProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [currentPlayingEpisode, setCurrentPlayingEpisode] = useState<string | null>(null);
-  const [statsCounter, setStatsCounter] = useState({ episodes: 0, listeners: 0, countries: 0 });
+  const [selectedEpisode, setSelectedEpisode] = useState<Episode | null>(null);
+  const [statsCounter, setStatsCounter] = useState({ episodes: episodeCount, listeners: 10000, countries: 45 });
+  const [episodes, setEpisodes] = useState<Episode[]>(sortEpisodesByDate(initialEpisodes));
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [sortOrder, setSortOrder] = useState<'newest' | 'oldest'>('newest');
+  const [layout, setLayout] = useState<'list' | 'grid'>('list');
   const router = useRouter();
+
+  const refreshEpisodes = async () => {
+    setIsRefreshing(true);
+    try {
+      const response = await fetch('/api/episodes');
+      if (response.ok) {
+        const data = await response.json() as { episodes: Episode[] };
+        if (data.episodes?.length > 0) {
+          const sorted = sortEpisodesByDate(data.episodes);
+          setEpisodes(sortOrder === 'newest' ? sorted : sorted.reverse());
+          setStatsCounter({ 
+            episodes: data.episodes.length, 
+            listeners: 10000, 
+            countries: 45 
+          });
+        }
+      }
+    } catch (error) {
+      console.error('Failed to refresh episodes:', error);
+    } finally {
+      setIsRefreshing(false);
+    }
+  };
+
+  const toggleSort = () => {
+    const newOrder = sortOrder === 'newest' ? 'oldest' : 'newest';
+    setSortOrder(newOrder);
+    setEpisodes(prev => [...prev].reverse());
+  };
 
   useEffect(() => {
     setIsVisible(true);
-    
-    // Animate stats counter
-    const timer = setTimeout(() => {
-      setStatsCounter({ episodes: 4, listeners: 10000, countries: 45 });
-    }, 1000);
 
-    // Handle hash-based navigation
     const handleHashNavigation = () => {
       const hash = window.location.hash.replace('#', '');
       if (hash) {
-        // Wait a bit for the page to render, then scroll
         setTimeout(() => {
           const element = document.getElementById(hash);
           if (element) {
@@ -35,34 +69,22 @@ export default function Home() {
       }
     };
 
-    // Handle hash on initial load
     handleHashNavigation();
-
-    // Handle hash changes
-    const handleRouteChange = () => {
-      handleHashNavigation();
-    };
-
-    router.events.on('routeChangeComplete', handleRouteChange);
+    router.events.on('routeChangeComplete', handleHashNavigation);
 
     return () => {
-      clearTimeout(timer);
-      router.events.off('routeChangeComplete', handleRouteChange);
+      router.events.off('routeChangeComplete', handleHashNavigation);
     };
   }, [router.events]);
 
   // Episode data with enhanced SEO metadata and display colors
-  const episodes: (Episode & { color: 'red' | 'green' | 'white' })[] = episodeData.map((episode, index) => ({
+  const episodesWithColors: (Episode & { color: 'red' | 'green' | 'white' })[] = episodes.map((episode, index) => ({
     ...episode,
     color: ['red', 'green', 'white'][index % 3] as 'red' | 'green' | 'white'
   }));
 
   const handlePlayEpisode = (episodeId: string) => {
     setCurrentPlayingEpisode(episodeId);
-    // Simulate playing for 3 seconds
-    setTimeout(() => {
-      setCurrentPlayingEpisode(null);
-    }, 3000);
   };
 
   const scrollToSection = (sectionId: string) => {
@@ -76,7 +98,7 @@ export default function Home() {
     <>
       <NextSeo {...generateHomepageSEO()} />
       
-      <PodcastStructuredData episodes={episodes} />
+      <PodcastStructuredData episodes={episodesWithColors} />
       <WebsiteStructuredData />
       <FAQStructuredData />
 
@@ -241,23 +263,175 @@ export default function Home() {
 
         {/* Episode Overviews Section */}
         <Section background="gradient-gray" id="episodes">
-            <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
-              <span className="text-red-400">Episode</span> <span className="text-green-500">Overviews</span>
-            </h2>
-            <p className="text-xl text-gray-400 text-center mb-12 max-w-3xl mx-auto">
-              Start your journey with Mani+ through these introductory episodes that set the foundation for The Beating Edge experience
-            </p>
-
-            <div className="space-y-6">
-              {episodes.map((episode) => (
-                <EpisodeCard
-                  key={episode.id}
-                  episode={episode}
-                  onPlay={handlePlayEpisode}
-                  isPlaying={currentPlayingEpisode === episode.id}
-                />
-              ))}
+            <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-4">
+              <div className="text-center md:text-left">
+                <h2 className="text-4xl md:text-5xl font-bold">
+                  <span className="text-red-400">Latest</span> <span className="text-green-500">Episodes</span>
+                </h2>
+                <p className="text-xl text-gray-400 mt-2">
+                  {episodes.length} episodes • Updated from RSS feed
+                </p>
+              </div>
+              <div className="flex flex-wrap justify-center gap-3">
+                <div className="flex gap-2 bg-gray-900/50 p-1 rounded-lg border border-gray-800">
+                  <button
+                    onClick={() => setLayout('list')}
+                    className={`px-3 py-2 rounded transition-all ${
+                      layout === 'list'
+                        ? 'bg-red-500 text-white'
+                        : 'text-gray-400 hover:text-white'
+                    }`}
+                    aria-label="List view"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                  </button>
+                  <button
+                    onClick={() => setLayout('grid')}
+                    className={`px-3 py-2 rounded transition-all ${
+                      layout === 'grid'
+                        ? 'bg-green-500 text-white'
+                        : 'text-gray-400 hover:text-white'
+                    }`}
+                    aria-label="Grid view"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 5a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM14 5a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 15a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1v-4zM14 15a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z" />
+                    </svg>
+                  </button>
+                </div>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={toggleSort}
+                  icon={sortOrder === 'newest' ? '↓' : '↑'}
+                >
+                  {sortOrder === 'newest' ? 'Newest' : 'Oldest'}
+                </Button>
+                <Button
+                  variant="primary"
+                  size="sm"
+                  onClick={refreshEpisodes}
+                  isLoading={isRefreshing}
+                  icon="🔄"
+                >
+                  Sync
+                </Button>
+              </div>
             </div>
+
+            {layout === 'list' ? (
+              <div className="space-y-6">
+                {episodesWithColors.map((episode) => (
+                  <EpisodeCard
+                    key={episode.id}
+                    episode={episode}
+                    onPlay={handlePlayEpisode}
+                    isPlaying={currentPlayingEpisode === episode.id}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {episodesWithColors.map((episode, index) => {
+                  // Alternate between profile and logo images
+                  const useProfileImage = index % 2 === 0;
+                  
+                  return (
+                  <div
+                    key={episode.id}
+                    className="group relative flex flex-col overflow-hidden rounded-3xl bg-gray-900/50 border border-gray-800 hover:border-gray-600 transition-all duration-500 hover:shadow-2xl hover:shadow-red-900/10"
+                  >
+                    {/* Image Section - Square Aspect Ratio */}
+                    <div className="relative w-full aspect-square overflow-hidden bg-black shrink-0">
+                      {/* Background Gradient */}
+                      {useProfileImage && (
+                        <div
+                          className={`absolute inset-0 bg-gradient-to-br ${
+                            episode.color === 'red'
+                              ? 'from-red-600/40 to-black/80'
+                              : episode.color === 'green'
+                              ? 'from-green-600/40 to-black/80'
+                              : 'from-white/20 to-black/80'
+                          } z-10 mix-blend-overlay`}
+                        />
+                      )}
+                      
+                      {/* Image */}
+                      <div className="absolute inset-0 flex items-center justify-center transform group-hover:scale-105 transition-transform duration-700">
+                        <Image
+                          src={useProfileImage ? "/profile.jpeg" : "/mani+logo.png"}
+                          width={400}
+                          height={400}
+                          alt="Podcast cover"
+                          className={`w-full h-full ${
+                            useProfileImage ? 'object-cover opacity-90' : 'object-contain p-12 opacity-100'
+                          }`}
+                          priority={index < 3}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Bottom Info Container - Full Width Overlay */}
+                    <div className="relative -mt-20 z-20 pt-8 pb-5 px-5 flex-1 flex flex-col">
+                      <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/95 to-transparent"></div>
+                      <div className="absolute inset-0 backdrop-blur-xl [mask-image:linear-gradient(to_top,black_60%,transparent)]"></div>
+                      <div className="relative flex-1 flex flex-col">
+                      <div className="mb-3">
+                        <h3 className="text-base font-bold text-white line-clamp-2 leading-tight group-hover:text-red-400 transition-colors min-h-[2.5rem]">
+                          {episode.title}
+                        </h3>
+                          </div>
+
+                      <div className="flex items-center gap-3 text-xs text-gray-400 mb-4">
+                        <span className="flex items-center gap-1">
+                          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                          {episode.releaseDate}
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                          {episode.duration}
+                        </span>
+                        </div>
+
+                      {/* Audio Player - Same as List View */}
+                      <div className="flex-1 flex flex-col justify-end">
+                        {episode.audioUrl && (
+                        <div className="mb-3">
+                          <AudioPlayer 
+                            src={episode.audioUrl}
+                            title={episode.title}
+                            variant={episode.color}
+                            compact={true}
+                          />
+                      </div>
+                      )}
+
+                      {/* More Details Button */}
+                      <button
+                        onClick={() => setSelectedEpisode(episode)}
+                        className="w-full py-2 px-4 rounded-xl bg-gray-800/50 hover:bg-gray-700 border border-white/10 text-white text-sm font-medium transition-all flex items-center justify-center gap-2"
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        More Details
+                      </button>
+                      </div>
+                      </div>
+                    </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+            <EpisodeModal 
+              episode={selectedEpisode} 
+              isOpen={!!selectedEpisode} 
+              onClose={() => setSelectedEpisode(null)} 
+              onPlay={handlePlayEpisode}
+            />
         </Section>
 
         {/* Subscribe Section */}
@@ -285,6 +459,61 @@ export default function Home() {
 
             </div>
         </Section>
+
+        {/* Charity Section
+        <Section background="black">
+          <div className="max-w-5xl mx-auto text-center">
+            <div className="inline-block mb-4 px-4 py-2 bg-red-500/10 border border-red-500/30 rounded-full">
+              <span className="text-red-400 font-semibold">🫀 Support Our Mission</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              <span className="text-white">Every</span>{' '}
+              <span className="text-red-400">Heartbeat</span>{' '}
+              <span className="text-white">Matters</span>
+            </h2>
+            <p className="text-xl text-gray-300 mb-8 leading-relaxed max-w-3xl mx-auto">
+              Support heart transplant patients through critical care, groundbreaking research, 
+              and compassionate assistance. Your donation saves lives at the most crucial moment.
+            </p>
+            
+            <div className="grid md:grid-cols-3 gap-6 mb-10">
+              <Card variant="hover" borderColor="red">
+                <div className="text-center">
+                  <div className="text-4xl mb-3">💊</div>
+                  <h3 className="text-lg font-bold text-red-400 mb-2">Direct Patient Care</h3>
+                  <p className="text-sm text-gray-400">Critical medications and post-transplant monitoring</p>
+                </div>
+              </Card>
+              <Card variant="hover" borderColor="green">
+                <div className="text-center">
+                  <div className="text-4xl mb-3">🔬</div>
+                  <h3 className="text-lg font-bold text-green-400 mb-2">Medical Research</h3>
+                  <p className="text-sm text-gray-400">Advancing cardiac care and transplant outcomes</p>
+                </div>
+              </Card>
+              <Card variant="hover" borderColor="white">
+                <div className="text-center">
+                  <div className="text-4xl mb-3">🤝</div>
+                  <h3 className="text-lg font-bold text-white mb-2">Patient Support</h3>
+                  <p className="text-sm text-gray-400">Counseling, transportation, and family assistance</p>
+                </div>
+              </Card>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/charity">
+                <Button variant="primary" size="lg" icon="❤️">
+                  Make a Difference
+                </Button>
+              </Link>
+              <Link href="/charity#impact">
+                <Button variant="outline" size="lg" icon="📊">
+                  See Your Impact
+                </Button>
+              </Link>
+            </div>
+            </div>
+        </Section> */}
 
         {/* FAQ Section */}
         <Section background="black" id="faq">
@@ -346,4 +575,31 @@ export default function Home() {
       </main>
     </>
   );
+}
+
+// Server-side data fetching with ISR (Incremental Static Regeneration)
+// Fetches episodes at build time and revalidates every hour
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
+  try {
+    const feedData = await fetchRSSFeed();
+    const sortedEpisodes = sortEpisodesByDate(feedData.episodes);
+    
+    return {
+      props: {
+        initialEpisodes: sortedEpisodes,
+        episodeCount: sortedEpisodes.length
+      },
+      revalidate: 3600
+    };
+  } catch (error) {
+    console.error('Error fetching RSS feed for SSR:', error);
+    
+    return {
+      props: {
+        initialEpisodes: sortEpisodesByDate(fallbackEpisodes),
+        episodeCount: fallbackEpisodes.length
+      },
+      revalidate: 600
+    };
+  }
 }

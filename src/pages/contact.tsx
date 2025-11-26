@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
 import { Header, Section, Card, Button } from '@/components';
-import Link from 'next/link';
 
 const CONTACT_EMAIL = 'info@mani.plus';
 
@@ -14,7 +13,6 @@ export default function Contact() {
     type: 'general'
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState('');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -165,24 +163,6 @@ export default function Contact() {
         {/* Contact Form */}
         <Section background="black">
           <div className="max-w-2xl mx-auto">
-            {isSubmitted ? (
-              <Card variant="gradient" className="text-center">
-                <div className="space-y-6">
-                  <div className="text-6xl">✨</div>
-                  <h3 className="text-2xl font-bold text-white">Thank You!</h3>
-                  <p className="text-gray-300 leading-relaxed">
-                    Your message has been received. We read every single message and will 
-                    get back to you as soon as possible. Thank you for being part of 
-                    The Beating Edge community.
-                  </p>
-                  <Link href="/">
-                    <Button variant="primary">
-                      🎧 Back to Episodes
-                    </Button>
-                  </Link>
-                </div>
-              </Card>
-            ) : (
               <Card variant="default">
                 <div className="text-center mb-8">
                   <h2 className="text-2xl font-bold text-white mb-2">Get In Touch</h2>
@@ -302,7 +282,6 @@ export default function Contact() {
                   </p>
                 </form>
               </Card>
-            )}
           </div>
         </Section>
 

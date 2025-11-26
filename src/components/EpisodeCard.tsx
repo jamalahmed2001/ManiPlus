@@ -35,11 +35,10 @@ export const EpisodeCard: React.FC<EpisodeCardProps> = ({
 
   return (
     <Card variant="hover" borderColor={episode.color}>
-      <div className="space-y-4">
-        {/* Episode Info */}
+      <div className="space-y-4" data-episode-id={episode.id}>
         <div>
           <h3 className={`text-xl font-bold text-white mb-2 transition-colors ${getTitleHoverColor(episode.color)}`}>
-            {episode.episodeNumber}: {episode.title}
+            {episode.title}
           </h3>
           <p className="text-gray-400 mb-2 leading-relaxed">
             {episode.description}
@@ -49,11 +48,10 @@ export const EpisodeCard: React.FC<EpisodeCardProps> = ({
           </div>
         </div>
 
-        {/* Audio Player */}
         {episode.audioUrl && (
           <AudioPlayer 
             src={episode.audioUrl}
-            title={`${episode.episodeNumber}: ${episode.title}`}
+            title={episode.title}
             variant={episode.color}
             compact={true}
             className="mt-4"
