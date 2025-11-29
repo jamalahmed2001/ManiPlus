@@ -335,8 +335,10 @@ export default function Home({ initialEpisodes, episodeCount }: HomeProps) {
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {episodesWithColors.map((episode, index) => {
-                  // Alternate between profile and logo images
-                  const useProfileImage = index % 2 === 0;
+                  // Extract episode number from episodeNumber field (e.g., "EP 001" -> "1")
+                  const episodeNumMatch = episode.episodeNumber?.match(/\d+/);
+                  const episodeNumber = episodeNumMatch ? parseInt(episodeNumMatch[0], 10).toString() : (index + 1).toString();
+                  const podcastImage = `/podcasts/${episodeNumber}.png`;
                   
                   return (
                   <div
@@ -345,30 +347,46 @@ export default function Home({ initialEpisodes, episodeCount }: HomeProps) {
                   >
                     {/* Image Section - Square Aspect Ratio */}
                     <div className="relative w-full aspect-square overflow-hidden bg-black shrink-0">
-                      {/* Background Gradient */}
-                      {useProfileImage && (
-                        <div
-                          className={`absolute inset-0 bg-gradient-to-br ${
-                            episode.color === 'red'
-                              ? 'from-red-600/40 to-black/80'
-                              : episode.color === 'green'
-                              ? 'from-green-600/40 to-black/80'
-                              : 'from-white/20 to-black/80'
-                          } z-10 mix-blend-overlay`}
-                        />
-                      )}
-                      
-                      {/* Image */}
-                      <div className="absolute inset-0 flex items-center justify-center transform group-hover:scale-105 transition-transform duration-700">
+                      {/* Blurred background layer for cohesive feel */}
+                      <div className="absolute inset-0">
                         <Image
-                          src={useProfileImage ? "/profile.jpeg" : "/mani+logo.png"}
+                          src={podcastImage}
                           width={400}
                           height={400}
-                          alt="Podcast cover"
-                          className={`w-full h-full ${
-                            useProfileImage ? 'object-cover opacity-90' : 'object-contain p-12 opacity-100'
-                          }`}
+                          alt=""
+                          className="w-full h-full object-cover blur-2xl scale-110 opacity-60"
                           priority={index < 3}
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none';
+                          }}
+                        />
+                      </div>
+                      
+                      {/* Color Gradient Overlay */}
+                      <div
+                        className={`absolute inset-0 ${
+                          episode.color === 'red'
+                            ? 'bg-gradient-to-br from-red-600/20 to-black/40'
+                            : episode.color === 'green'
+                            ? 'bg-gradient-to-br from-green-600/20 to-black/40'
+                            : 'bg-gradient-to-br from-white/10 to-black/40'
+                        } z-10`}
+                      />
+                      
+                      {/* Main Image - Slightly scaled to fill space */}
+                      <div className="absolute inset-0 flex items-center justify-center z-20">
+                        <Image
+                          src={podcastImage}
+                          width={400}
+                          height={400}
+                          alt={`${episode.title} cover`}
+                          className="w-[110%] h-[110%] object-contain transform group-hover:scale-105 transition-transform duration-700"
+                          priority={index < 3}
+                          onError={(e) => {
+                            // Fallback to logo if image not found
+                            e.currentTarget.src = '/mani+logo.png';
+                            e.currentTarget.className = 'w-full h-full object-contain p-12 transform group-hover:scale-105 transition-transform duration-700';
+                          }}
                         />
                       </div>
                     </div>

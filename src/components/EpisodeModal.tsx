@@ -13,6 +13,11 @@ interface EpisodeModalProps {
 export const EpisodeModal: React.FC<EpisodeModalProps> = ({ episode, isOpen, onClose, onPlay: _onPlay }) => {
   if (!episode || !isOpen) return null;
 
+  // Extract episode number from episodeNumber field (e.g., "EP 001" -> "1")
+  const episodeNumMatch = episode.episodeNumber?.match(/\d+/);
+  const episodeNumber = episodeNumMatch ? parseInt(episodeNumMatch[0], 10).toString() : '1';
+  const podcastImage = `/podcasts/${episodeNumber}.png`;
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
       <div 
@@ -32,14 +37,36 @@ export const EpisodeModal: React.FC<EpisodeModalProps> = ({ episode, isOpen, onC
         </button>
 
         {/* Image Section */}
-        <div className="w-full md:w-1/2 relative h-64 md:h-auto shrink-0">
-          <Image
-            src="/mani+logo.png" // Or generic image since we don't have per-episode images other than the logic in index.tsx
-            alt={episode.title}
-            fill
-            className="object-cover"
-          />
-           <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent md:bg-gradient-to-r" />
+        <div className="w-full md:w-1/2 relative h-64 md:h-auto shrink-0 bg-black overflow-hidden">
+          {/* Blurred background layer */}
+          <div className="absolute inset-0">
+            <Image
+              src={podcastImage}
+              alt=""
+              fill
+              className="object-cover blur-2xl scale-110 opacity-60"
+              onError={(e) => {
+                e.currentTarget.style.display = 'none';
+              }}
+            />
+          </div>
+          
+          {/* Main Image */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <Image
+              src={podcastImage}
+              alt={episode.title}
+              width={400}
+              height={400}
+              className="w-[110%] h-[110%] object-contain"
+              onError={(e) => {
+                e.currentTarget.src = '/mani+logo.png';
+                e.currentTarget.className = 'w-full h-full object-contain p-12';
+              }}
+            />
+          </div>
+          
+          <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent md:bg-gradient-to-r" />
         </div>
 
         {/* Content Section */}
