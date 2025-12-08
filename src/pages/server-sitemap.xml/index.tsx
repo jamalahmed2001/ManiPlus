@@ -5,7 +5,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   // This would typically fetch from your CMS, database, or API
   // For now, we'll create dynamic entries for episodes and other content
   
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://thebeatingedge.com'
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mani.plus'
   
   // Sample episodes - replace with actual data fetching
   const episodes = [

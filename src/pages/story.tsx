@@ -9,12 +9,12 @@ export default function Story() {
     {
       position: 1,
       name: 'Home',
-      item: 'https://thebeatingedge.com'
+      item: 'https://mani.plus'
     },
     {
       position: 2,
       name: "Mani+'s Story",
-      item: 'https://thebeatingedge.com/story'
+      item: 'https://mani.plus/story'
     }
   ]
 

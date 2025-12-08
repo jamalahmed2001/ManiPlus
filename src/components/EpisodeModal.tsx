@@ -14,7 +14,7 @@ export const EpisodeModal: React.FC<EpisodeModalProps> = ({ episode, isOpen, onC
   if (!episode || !isOpen) return null;
 
   // Extract episode number from episodeNumber field (e.g., "EP 001" -> "1")
-  const episodeNumMatch = episode.episodeNumber?.match(/\d+/);
+  const episodeNumMatch = /\d+/.exec(episode.episodeNumber ?? '');
   const episodeNumber = episodeNumMatch ? parseInt(episodeNumMatch[0], 10).toString() : '1';
   const podcastImage = `/podcasts/${episodeNumber}.png`;
 

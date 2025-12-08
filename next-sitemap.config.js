@@ -4,7 +4,7 @@
 
 /** @type {import('next-sitemap').IConfig} */
 export default {
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://thebeatingedge.com',
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://mani.plus',
   generateRobotsTxt: true,
   sitemapSize: 7000,
   changefreq: /** @type {Changefreq} */ ('daily'),
@@ -19,7 +19,7 @@ export default {
   ],
   alternateRefs: [
     {
-      href: 'https://thebeatingedge.com',
+      href: 'https://mani.plus',
       hreflang: 'en-US',
     }
   ],
@@ -109,7 +109,7 @@ export default {
       }
     ],
     additionalSitemaps: [
-      `${process.env.NEXT_PUBLIC_SITE_URL || 'https://thebeatingedge.com'}/server-sitemap.xml`,
+      `${process.env.NEXT_PUBLIC_SITE_URL || 'https://mani.plus'}/server-sitemap.xml`,
     ]
   }
 }

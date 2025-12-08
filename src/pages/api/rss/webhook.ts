@@ -113,7 +113,7 @@ async function regenerateFeeds() {
     // Trigger feed regeneration by making requests to feed endpoints
     // This will cause them to rebuild with fresh data
     
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mani.plus'
     
     // Trigger RSS feed regeneration
     await fetch(`${baseUrl}/api/feed.xml`)
@@ -129,7 +129,7 @@ async function regenerateFeeds() {
 async function regenerateSitemaps() {
   try {
     // Trigger sitemap regeneration
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mani.plus'
     await fetch(`${baseUrl}/server-sitemap.xml`)
     
     console.log('Sitemaps regenerated')

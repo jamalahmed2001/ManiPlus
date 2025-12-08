@@ -1,5 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
+import { siteConfig } from '@/utils/seo';
 
 interface Episode {
   name: string;
@@ -20,8 +21,8 @@ export const PodcastStructuredData: React.FC<PodcastStructuredDataProps> = ({ ep
     "@type": "PodcastSeries",
     "name": "The Beating Edge with Mani+",
     "description": "Resilience, medicine, innovation, and the human spirit in healthcare. Honest conversations with patients, clinicians, and researchers about transplant care, dialysis, breakthroughs, and the human side of modern medicine.",
-    "url": "https://thebeatingedge.com",
-    "image": "https://thebeatingedge.com/mani+logo.png",
+    "url": siteConfig.siteUrl,
+    "image": `${siteConfig.siteUrl}/mani+logo.png`,
     "author": {
       "@type": "Person",
       "name": "Mani+",
@@ -32,7 +33,7 @@ export const PodcastStructuredData: React.FC<PodcastStructuredDataProps> = ({ ep
       "name": "The Beating Edge",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://thebeatingedge.com/mani+logo.png"
+        "url": `${siteConfig.siteUrl}/mani+logo.png`
       }
     },
     "genre": ["Health", "Medicine", "Patient Stories", "Healthcare"],
@@ -57,8 +58,8 @@ export const PodcastStructuredData: React.FC<PodcastStructuredDataProps> = ({ ep
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "The Beating Edge with Mani+",
-    "url": "https://thebeatingedge.com",
-    "logo": "https://thebeatingedge.com/mani+logo.png",
+    "url": siteConfig.siteUrl,
+    "logo": `${siteConfig.siteUrl}/mani+logo.png`,
     "description": "Resilience, medicine, innovation, and the human spirit in healthcare — stories that move, insights that matter.",
     "founder": {
       "@type": "Person",
@@ -74,7 +75,7 @@ export const PodcastStructuredData: React.FC<PodcastStructuredDataProps> = ({ ep
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "The Beating Edge with Mani+",
-    "url": "https://thebeatingedge.com",
+    "url": siteConfig.siteUrl,
     "description": "Resilience in healthcare, medicine and innovation — human stories from patients, clinicians, and researchers.",
     "publisher": {
       "@type": "Organization",
@@ -82,7 +83,7 @@ export const PodcastStructuredData: React.FC<PodcastStructuredDataProps> = ({ ep
     },
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "https://thebeatingedge.com/search?q={search_term_string}",
+      "target": `${siteConfig.siteUrl}/search?q={search_term_string}`,
       "query-input": "required name=search_term_string"
     }
   };

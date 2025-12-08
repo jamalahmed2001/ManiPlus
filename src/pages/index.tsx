@@ -336,7 +336,7 @@ export default function Home({ initialEpisodes, episodeCount }: HomeProps) {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {episodesWithColors.map((episode, index) => {
                   // Extract episode number from episodeNumber field (e.g., "EP 001" -> "1")
-                  const episodeNumMatch = episode.episodeNumber?.match(/\d+/);
+                  const episodeNumMatch = /\d+/.exec(episode.episodeNumber ?? '');
                   const episodeNumber = episodeNumMatch ? parseInt(episodeNumMatch[0], 10).toString() : (index + 1).toString();
                   const podcastImage = `/podcasts/${episodeNumber}.png`;
                   

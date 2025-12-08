@@ -3,7 +3,7 @@ import type { NextSeoProps, ArticleJsonLdProps } from 'next-seo'
 // Base site configuration
 export const siteConfig = {
   siteName: 'The Beating Edge with Mani+',
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://thebeatingedge.com',
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mani.plus',
   description: 'A podcast at the intersection of resilience, medicine, innovation, and the human spirit in healthcare. Raw, honest conversations with patients, clinicians, and researchers about heart transplant, dialysis, and breakthroughs that change lives.',
   author: 'Mani+',
   twitter: '@thebeatingedge',
@@ -327,6 +327,53 @@ export const generateStoryPageSEO = (): NextSeoProps => {
       {
         name: 'keywords',
         content: 'resilience in healthcare, medicine, medical innovation, human spirit, heart transplant story, dialysis journey, patient advocacy, healthcare storytelling'
+      },
+      {
+        name: 'author',
+        content: siteConfig.author
+      },
+      {
+        property: 'article:accessible_for_free',
+        content: 'true'
+      }
+    ]
+  }
+}
+
+// Generate SEO for charity page
+export const generateCharityPageSEO = (): NextSeoProps => {
+  const pageUrl = `${siteConfig.siteUrl}/charity`
+  
+  return {
+    title: `Heart Transplant Charity Fund | ${siteConfig.siteName}`,
+    description: 'Support life-saving heart transplant care, groundbreaking research, and compassionate patient assistance. Your donation transforms lives at the most critical moment.',
+    canonical: pageUrl,
+    openGraph: {
+      type: 'website',
+      locale: siteConfig.locale,
+      url: pageUrl,
+      siteName: siteConfig.siteName,
+      title: `Heart Transplant Charity Fund - Every Heartbeat Counts | ${siteConfig.siteName}`,
+      description: 'Support heart transplant patients through direct financial assistance, medical research funding, and patient advocacy programs. Tax-deductible donations.',
+      images: [
+        {
+          url: `${siteConfig.siteUrl}${siteConfig.defaultImage}`,
+          width: 1200,
+          height: 630,
+          alt: `Heart Transplant Charity Fund - ${siteConfig.siteName}`,
+          type: 'image/png'
+        }
+      ]
+    },
+    twitter: {
+      handle: siteConfig.twitter,
+      site: siteConfig.twitter,
+      cardType: 'summary_large_image'
+    },
+    additionalMetaTags: [
+      {
+        name: 'keywords',
+        content: 'heart transplant charity, organ donation support, cardiac care funding, transplant patient assistance, medical research funding, heart transplant donations, patient advocacy, cardiac research'
       },
       {
         name: 'author',
