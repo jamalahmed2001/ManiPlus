@@ -6,11 +6,13 @@
 export default {
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://mani.plus',
   generateRobotsTxt: true,
+  generateIndexSitemap: false, // Disable static sitemap generation - using unified dynamic sitemap
   sitemapSize: 7000,
   changefreq: /** @type {Changefreq} */ ('daily'),
   priority: 0.7,
   exclude: [
-    '/server-sitemap.xml',
+    '/sitemap.xml', // Exclude dynamic sitemap from static generation
+    '/server-sitemap.xml', // Legacy - can be removed after migration
     '/api/*',
     '/admin/*',
     '/_next/*',
@@ -24,29 +26,83 @@ export default {
     }
   ],
   transform: async (config, path) => {
-    // Enhanced SEO for podcast-specific paths
-    if (path.includes('/episodes/')) {
+    const now = new Date().toISOString()
+    
+    // Homepage - highest priority
+    if (path === '/' || path === '') {
       return {
         loc: path,
-        changefreq: /** @type {Changefreq} */ ('weekly'),
-        priority: 0.9, // High priority for episodes
-        lastmod: new Date().toISOString(),
+        changefreq: /** @type {Changefreq} */ ('daily'),
+        priority: 1.0,
+        lastmod: now,
         alternateRefs: config.alternateRefs ?? [],
-        // Add podcast-specific metadata
         images: [{
           loc: new URL(`${config.siteUrl}/mani+logo.png`),
-          title: 'The Beating Edge with Mani+ Podcast Logo'
+          title: 'The Beating Edge with Mani+ - Healthcare Resilience Podcast',
+          caption: 'Resilience, medicine, innovation, and the human spirit in healthcare'
         }]
       }
     }
 
-    // Enhanced SEO for story/about pages
-    if (path.includes('/story') || path.includes('/about')) {
+    // Episode pages - high priority for SEO
+    if (path.includes('/episodes/')) {
+      return {
+        loc: path,
+        changefreq: /** @type {Changefreq} */ ('weekly'),
+        priority: 0.9,
+        lastmod: now,
+        alternateRefs: config.alternateRefs ?? [],
+        images: [{
+          loc: new URL(`${config.siteUrl}/mani+logo.png`),
+          title: 'The Beating Edge with Mani+ Podcast Episode'
+        }]
+      }
+    }
+
+    // Story page - high priority for personal branding
+    if (path.includes('/story')) {
+      return {
+        loc: path,
+        changefreq: /** @type {Changefreq} */ ('monthly'),
+        priority: 0.9,
+        lastmod: now,
+        alternateRefs: config.alternateRefs ?? [],
+        images: [{
+          loc: new URL(`${config.siteUrl}/mani+logo.png`),
+          title: "Mani+'s Healthcare Journey - Heart Transplant & Dialysis Story"
+        }]
+      }
+    }
+
+    // Charity page - important for engagement
+    if (path.includes('/charity')) {
       return {
         loc: path,
         changefreq: /** @type {Changefreq} */ ('monthly'),
         priority: 0.8,
-        lastmod: new Date().toISOString(),
+        lastmod: now,
+        alternateRefs: config.alternateRefs ?? []
+      }
+    }
+
+    // Contact page
+    if (path.includes('/contact')) {
+      return {
+        loc: path,
+        changefreq: /** @type {Changefreq} */ ('monthly'),
+        priority: 0.7,
+        lastmod: now,
+        alternateRefs: config.alternateRefs ?? []
+      }
+    }
+
+    // Privacy page - low priority but necessary
+    if (path.includes('/privacy')) {
+      return {
+        loc: path,
+        changefreq: /** @type {Changefreq} */ ('yearly'),
+        priority: 0.3,
+        lastmod: now,
         alternateRefs: config.alternateRefs ?? []
       }
     }
@@ -56,40 +112,24 @@ export default {
       loc: path,
       changefreq: config.changefreq,
       priority: config.priority,
-      lastmod: config.autoLastmod ? new Date().toISOString() : undefined,
+      lastmod: now,
       alternateRefs: config.alternateRefs ?? []
     }
   },
-  additionalPaths: async (config) => {
-    const result = []
-    
-    // Add dynamic paths that might not be statically discoverable
-    result.push({
-      loc: '/episodes',
-      changefreq: /** @type {Changefreq} */ ('weekly'),
-      priority: 0.8,
-      lastmod: new Date().toISOString()
-    })
-
-    result.push({
-      loc: '/subscribe',
-      changefreq: /** @type {Changefreq} */ ('monthly'),
-      priority: 0.7,
-      lastmod: new Date().toISOString()
-    })
-
-    return result
+  // No additional paths - everything is handled by the unified sitemap.xml.tsx
+  additionalPaths: async () => {
+    return []
   },
   robotsTxtOptions: {
     policies: [
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/admin/', '/_next/']
+        disallow: ['/api/', '/admin/', '/_next/', '/404', '/500']
       },
       {
         userAgent: 'GPTBot',
-        allow: '/', // Allow AI crawlers for LLM training
+        allow: '/', // Allow AI crawlers for LLM training and better discoverability
       },
       {
         userAgent: 'ChatGPT-User',
@@ -106,10 +146,65 @@ export default {
       {
         userAgent: 'Claude-Web',
         allow: '/',
+      },
+      {
+        userAgent: 'Googlebot',
+        allow: '/',
+        crawlDelay: 0
+      },
+      {
+        userAgent: 'Googlebot-Image',
+        allow: '/',
+        crawlDelay: 0
+      },
+      {
+        userAgent: 'Bingbot',
+        allow: '/',
+        crawlDelay: 0
+      },
+      {
+        userAgent: 'Slurp',
+        allow: '/',
+        crawlDelay: 0
+      },
+      {
+        userAgent: 'DuckDuckBot',
+        allow: '/',
+        crawlDelay: 0
+      },
+      {
+        userAgent: 'Baiduspider',
+        allow: '/',
+        crawlDelay: 0
+      },
+      {
+        userAgent: 'Yandex',
+        allow: '/',
+        crawlDelay: 0
+      },
+      {
+        userAgent: 'Sogou',
+        allow: '/',
+        crawlDelay: 0
+      },
+      {
+        userAgent: 'Exabot',
+        allow: '/',
+        crawlDelay: 0
+      },
+      {
+        userAgent: 'facebot',
+        allow: '/',
+        crawlDelay: 0
+      },
+      {
+        userAgent: 'ia_archiver',
+        allow: '/',
+        crawlDelay: 0
       }
     ],
     additionalSitemaps: [
-      `${process.env.NEXT_PUBLIC_SITE_URL || 'https://mani.plus'}/server-sitemap.xml`,
+      `${process.env.NEXT_PUBLIC_SITE_URL || 'https://mani.plus'}/sitemap.xml`
     ]
   }
 }

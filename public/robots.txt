@@ -1,33 +1,74 @@
-# *
+# robots.txt for https://mani.plus
+# Single source of truth sitemap
+
 User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /admin/
 Disallow: /_next/
+Disallow: /404
+Disallow: /500
 
-# GPTBot
+# Allow AI crawlers for better discoverability
 User-agent: GPTBot
 Allow: /
 
-# ChatGPT-User
 User-agent: ChatGPT-User
 Allow: /
 
-# CCBot
 User-agent: CCBot
 Allow: /
 
-# anthropic-ai
 User-agent: anthropic-ai
 Allow: /
 
-# Claude-Web
 User-agent: Claude-Web
 Allow: /
 
-# Host
-Host: http://localhost:3001
+# Search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
 
-# Sitemaps
-Sitemap: http://localhost:3001/sitemap.xml
-Sitemap: http://localhost:3001/server-sitemap.xml
+User-agent: Googlebot-Image
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 0
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 0
+
+User-agent: Yandex
+Allow: /
+Crawl-delay: 0
+
+User-agent: Sogou
+Allow: /
+Crawl-delay: 0
+
+User-agent: Exabot
+Allow: /
+Crawl-delay: 0
+
+User-agent: facebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: ia_archiver
+Allow: /
+Crawl-delay: 0
+
+# Single unified sitemap
+Sitemap: https://mani.plus/sitemap.xml
