@@ -37,7 +37,9 @@ export const EpisodeCard: React.FC<EpisodeCardProps> = ({
   // Extract episode number from episodeNumber field (e.g., "EP 001" -> "1")
   const episodeNumMatch = /\d+/.exec(episode.episodeNumber ?? '');
   const episodeNumber = episodeNumMatch ? parseInt(episodeNumMatch[0], 10).toString() : '1';
-  const podcastImage = `/podcasts/${episodeNumber}.png`;
+  // Use .jpeg for episode 1, .png for all others
+  const imageExtension = episodeNumber === '1' ? 'jpeg' : 'png';
+  const podcastImage = `/podcasts/${episodeNumber}.${imageExtension}`;
 
   return (
     <Card variant="hover" borderColor={episode.color}>
@@ -76,7 +78,7 @@ export const EpisodeCard: React.FC<EpisodeCardProps> = ({
               width={400}
               height={400}
               alt={`${episode.title} cover`}
-              className="w-[90%] h-[90%] object-contain transform group-hover:scale-105 transition-transform duration-700"
+              className={`w-full h-full ${episodeNumber === '1' ? 'object-cover scale-110' : 'object-contain w-[90%] h-[90%]'} transform group-hover:scale-105 transition-transform duration-700`}
               onError={(e) => {
                 // Fallback to logo if image not found
                 e.currentTarget.src = '/mani+logo.png';
@@ -88,13 +90,13 @@ export const EpisodeCard: React.FC<EpisodeCardProps> = ({
 
         {/* Content Section */}
         <div className="flex-1 space-y-4">
-          <div>
-            <h3 className={`text-xl font-bold text-white mb-2 transition-colors ${getTitleHoverColor(episode.color)}`}>
-              {episode.title}
-            </h3>
+        <div>
+          <h3 className={`text-xl font-bold text-white mb-2 transition-colors ${getTitleHoverColor(episode.color)}`}>
+            {episode.title}
+          </h3>
             <p className="text-gray-400 mb-2 leading-relaxed line-clamp-3">
-              {episode.description}
-            </p>
+            {episode.description}
+          </p>
             <div className="flex flex-wrap items-center gap-3 text-sm text-gray-500">
               <span className="flex items-center gap-1">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -109,17 +111,17 @@ export const EpisodeCard: React.FC<EpisodeCardProps> = ({
                 {episode.duration}
               </span>
             </div>
-          </div>
+        </div>
 
-          {episode.audioUrl && (
-            <AudioPlayer 
-              src={episode.audioUrl}
-              title={episode.title}
-              variant={episode.color}
-              compact={true}
-              className="mt-4"
-            />
-          )}
+        {episode.audioUrl && (
+          <AudioPlayer 
+            src={episode.audioUrl}
+            title={episode.title}
+            variant={episode.color}
+            compact={true}
+            className="mt-4"
+          />
+        )}
         </div>
       </div>
     </Card>

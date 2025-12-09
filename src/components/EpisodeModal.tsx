@@ -16,7 +16,9 @@ export const EpisodeModal: React.FC<EpisodeModalProps> = ({ episode, isOpen, onC
   // Extract episode number from episodeNumber field (e.g., "EP 001" -> "1")
   const episodeNumMatch = /\d+/.exec(episode.episodeNumber ?? '');
   const episodeNumber = episodeNumMatch ? parseInt(episodeNumMatch[0], 10).toString() : '1';
-  const podcastImage = `/podcasts/${episodeNumber}.png`;
+  // Use .jpeg for episode 1, .png for all others
+  const imageExtension = episodeNumber === '1' ? 'jpeg' : 'png';
+  const podcastImage = `/podcasts/${episodeNumber}.${imageExtension}`;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
@@ -58,7 +60,7 @@ export const EpisodeModal: React.FC<EpisodeModalProps> = ({ episode, isOpen, onC
               alt={episode.title}
               width={400}
               height={400}
-              className="w-[110%] h-[110%] object-contain"
+              className={episodeNumber === '1' ? 'w-full h-full object-cover scale-110' : 'w-[110%] h-[110%] object-contain'}
               onError={(e) => {
                 e.currentTarget.src = '/mani+logo.png';
                 e.currentTarget.className = 'w-full h-full object-contain p-12';

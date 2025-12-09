@@ -338,7 +338,9 @@ export default function Home({ initialEpisodes, episodeCount }: HomeProps) {
                   // Extract episode number from episodeNumber field (e.g., "EP 001" -> "1")
                   const episodeNumMatch = /\d+/.exec(episode.episodeNumber ?? '');
                   const episodeNumber = episodeNumMatch ? parseInt(episodeNumMatch[0], 10).toString() : (index + 1).toString();
-                  const podcastImage = `/podcasts/${episodeNumber}.png`;
+                  // Use .jpeg for episode 1, .png for all others
+                  const imageExtension = episodeNumber === '1' ? 'jpeg' : 'png';
+                  const podcastImage = `/podcasts/${episodeNumber}.${imageExtension}`;
                   
                   return (
                   <div
@@ -373,14 +375,14 @@ export default function Home({ initialEpisodes, episodeCount }: HomeProps) {
                         } z-10`}
                       />
                       
-                      {/* Main Image - Slightly scaled to fill space */}
+                      {/* Main Image - Fill space entirely, especially for episode 1 */}
                       <div className="absolute inset-0 flex items-center justify-center z-20">
                         <Image
                           src={podcastImage}
                           width={400}
                           height={400}
                           alt={`${episode.title} cover`}
-                          className="w-[110%] h-[110%] object-contain transform group-hover:scale-105 transition-transform duration-700"
+                          className={`${episodeNumber === '1' ? 'w-full h-full object-cover scale-110' : 'w-[110%] h-[110%] object-contain'} transform group-hover:scale-105 transition-transform duration-700`}
                           priority={index < 3}
                           onError={(e) => {
                             // Fallback to logo if image not found

@@ -101,13 +101,18 @@ function parseRSSToEpisodes(xmlText: string): Episode[] {
       // Extract topics from description (simple keyword extraction)
       const topics = extractTopics(description, title)
       
+      // Extract episode number from title as fallback/verification (e.g., "Episode 7 - Title" -> "7")
+      const titleEpisodeMatch = /Episode\s+(\d+)/i.exec(title)
+      const titleEpisodeNum = titleEpisodeMatch?.[1]
+      
+      // Use title episode number if RSS metadata is missing or mismatched
+      const verifiedEpisodeNum = episodeNum ?? titleEpisodeNum ?? String(episodes.length + 1)
+      
       // Format episode number properly
-      const formattedEpisodeNum = episodeNum 
-        ? `EP ${episodeNum.padStart(3, '0')}` 
-        : `EP ${String(episodes.length + 1).padStart(3, '0')}`
+      const formattedEpisodeNum = `EP ${verifiedEpisodeNum.padStart(3, '0')}`
       
       episodes.push({
-        id: guid ?? `episode-${episodeNum ?? episodes.length + 1}`,
+        id: guid ?? `episode-${verifiedEpisodeNum}`,
         title,
         description: cleanDescription(description),
         duration: duration || 'Unknown',
