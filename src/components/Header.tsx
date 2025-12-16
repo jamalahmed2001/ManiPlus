@@ -84,6 +84,9 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
             <Link href="/story" className="text-gray-300 hover:text-white transition-colors">
               Mani&apos;s Story
             </Link>
+            <Link href="/charity" className="text-gray-300 hover:text-red-400 transition-colors">
+              Charity
+            </Link>
             <Link href="/contact" className="text-gray-300 hover:text-white transition-colors">
               Contact
             </Link>
@@ -138,6 +141,13 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Mani&apos;s Story
+              </Link>
+              <Link 
+                href="/charity" 
+                className="text-gray-300 hover:text-red-400 transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Charity
               </Link>
               <Link 
                 href="/contact" 

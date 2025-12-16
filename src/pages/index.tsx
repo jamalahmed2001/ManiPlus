@@ -480,60 +480,54 @@ export default function Home({ initialEpisodes, episodeCount }: HomeProps) {
             </div>
         </Section>
 
-        {/* Charity Section
-        <Section background="black">
+        {/* Charity Section */}
+        <Section background="black" id="charity">
           <div className="max-w-5xl mx-auto text-center">
-            <div className="inline-block mb-4 px-4 py-2 bg-red-500/10 border border-red-500/30 rounded-full">
-              <span className="text-red-400 font-semibold">🫀 Support Our Mission</span>
+            <div className="inline-block mb-4 px-4 py-2 bg-green-500/10 border border-green-500/30 rounded-full">
+              <span className="text-green-400 font-semibold">🤝 Supporting Change Together</span>
             </div>
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              <span className="text-white">Every</span>{' '}
-              <span className="text-red-400">Heartbeat</span>{' '}
-              <span className="text-white">Matters</span>
+              <span className="text-white">Charity</span>{' '}
+              <span className="text-green-400">Partners</span>
             </h2>
             <p className="text-xl text-gray-300 mb-8 leading-relaxed max-w-3xl mx-auto">
-              Support heart transplant patients through critical care, groundbreaking research, 
-              and compassionate assistance. Your donation saves lives at the most crucial moment.
+              Working alongside organizations making a real difference in organ transplant care, 
+              research, and patient support. Learn about the charities we support and how you can help.
             </p>
             
-            <div className="grid md:grid-cols-3 gap-6 mb-10">
-              <Card variant="hover" borderColor="red">
-                <div className="text-center">
-                  <div className="text-4xl mb-3">💊</div>
-                  <h3 className="text-lg font-bold text-red-400 mb-2">Direct Patient Care</h3>
-                  <p className="text-sm text-gray-400">Critical medications and post-transplant monitoring</p>
-                </div>
-              </Card>
+            <div className="grid md:grid-cols-2 gap-6 mb-10 max-w-4xl mx-auto">
               <Card variant="hover" borderColor="green">
                 <div className="text-center">
                   <div className="text-4xl mb-3">🔬</div>
-                  <h3 className="text-lg font-bold text-green-400 mb-2">Medical Research</h3>
-                  <p className="text-sm text-gray-400">Advancing cardiac care and transplant outcomes</p>
+                  <h3 className="text-lg font-bold text-green-400 mb-2">Kidney Research UK</h3>
+                  <p className="text-sm text-gray-400 mb-4">Andy Cole Fund - Supporting kidney transplant research</p>
+                  <p className="text-xs text-gray-500">Funding research into prevention, treatment and management of kidney disease</p>
                 </div>
               </Card>
               <Card variant="hover" borderColor="white">
                 <div className="text-center">
-                  <div className="text-4xl mb-3">🤝</div>
-                  <h3 className="text-lg font-bold text-white mb-2">Patient Support</h3>
-                  <p className="text-sm text-gray-400">Counseling, transportation, and family assistance</p>
+                  <div className="text-4xl mb-3">🫀</div>
+                  <h3 className="text-lg font-bold text-white mb-2">New Start Charity</h3>
+                  <p className="text-sm text-gray-400 mb-4">Supporting organ transplant patients and families</p>
+                  <p className="text-xs text-gray-500">Providing resources, support networks, and assistance during challenging times</p>
                 </div>
               </Card>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/charity">
-                <Button variant="primary" size="lg" icon="❤️">
-                  Make a Difference
+                <Button variant="primary" size="lg" icon="🤝">
+                  Learn More
                 </Button>
               </Link>
-              <Link href="/charity#impact">
-                <Button variant="outline" size="lg" icon="📊">
-                  See Your Impact
+              <Link href="/charity#charities">
+                <Button variant="outline" size="lg" icon="🔗">
+                  View Charities
                 </Button>
               </Link>
             </div>
             </div>
-        </Section> */}
+        </Section>
 
         {/* FAQ Section */}
         <Section background="black" id="faq">
@@ -573,6 +567,7 @@ export default function Home({ initialEpisodes, episodeCount }: HomeProps) {
             <div className="flex justify-center space-x-6 text-gray-400 mb-6">
               <Link href="/contact" className="hover:text-red-400 transition-colors">Contact</Link>
               <Link href="/story" className="hover:text-green-500 transition-colors">Mani&apos;s Story</Link>
+              <Link href="/charity" className="hover:text-red-400 transition-colors">Charity</Link>
               <button 
                 onClick={() => scrollToSection('about')}
                 className="hover:text-white transition-colors"

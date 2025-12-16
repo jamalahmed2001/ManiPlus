@@ -340,6 +340,53 @@ export const generateStoryPageSEO = (): NextSeoProps => {
   }
 }
 
+// Generate SEO for charity page
+export const generateCharityPageSEO = (): NextSeoProps => {
+  const pageUrl = `${siteConfig.siteUrl}/charity`
+  
+  return {
+    title: `Heart Transplant Charity Fund | ${siteConfig.siteName}`,
+    description: 'Support life-saving heart transplant care, groundbreaking research, and compassionate patient assistance. Your donation transforms lives at the most critical moment.',
+    canonical: pageUrl,
+    openGraph: {
+      type: 'website',
+      locale: siteConfig.locale,
+      url: pageUrl,
+      siteName: siteConfig.siteName,
+      title: `Heart Transplant Charity Fund - Every Heartbeat Counts | ${siteConfig.siteName}`,
+      description: 'Support heart transplant patients through direct financial assistance, medical research funding, and patient advocacy programs. Tax-deductible donations.',
+      images: [
+        {
+          url: `${siteConfig.siteUrl}${siteConfig.defaultImage}`,
+          width: 1200,
+          height: 630,
+          alt: `Heart Transplant Charity Fund - ${siteConfig.siteName}`,
+          type: 'image/png'
+        }
+      ]
+    },
+    twitter: {
+      handle: siteConfig.twitter,
+      site: siteConfig.twitter,
+      cardType: 'summary_large_image'
+    },
+    additionalMetaTags: [
+      {
+        name: 'keywords',
+        content: 'heart transplant charity, organ donation support, cardiac care funding, transplant patient assistance, medical research funding, heart transplant donations, patient advocacy, cardiac research'
+      },
+      {
+        name: 'author',
+        content: siteConfig.author
+      },
+      {
+        property: 'article:accessible_for_free',
+        content: 'true'
+      }
+    ]
+  }
+}
+
 // Generate enhanced Article JSON-LD for episodes
 export const generateEpisodeArticleJsonLd = (episode: Episode): ArticleJsonLdProps => {
   return {
