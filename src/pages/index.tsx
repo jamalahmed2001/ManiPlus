@@ -335,12 +335,8 @@ export default function Home({ initialEpisodes, episodeCount }: HomeProps) {
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {episodesWithColors.map((episode, index) => {
-                  // Extract episode number from episodeNumber field (e.g., "EP 001" -> "1")
-                  const episodeNumMatch = /\d+/.exec(episode.episodeNumber ?? '');
-                  const episodeNumber = episodeNumMatch ? parseInt(episodeNumMatch[0], 10).toString() : (index + 1).toString();
-                  // Use .jpeg for episode 1, .png for all others
-                  const imageExtension = episodeNumber === '1' ? 'jpeg' : 'png';
-                  const podcastImage = `/podcasts/${episodeNumber}.${imageExtension}`;
+                  // All episodes share the unified Mani+ "Beating Edge" cover.
+                  const podcastImage = `/podcasts/1.webp`;
                   
                   return (
                   <div
@@ -382,7 +378,7 @@ export default function Home({ initialEpisodes, episodeCount }: HomeProps) {
                           width={400}
                           height={400}
                           alt={`${episode.title} cover`}
-                          className={`${episodeNumber === '1' ? 'w-full h-full object-cover scale-110' : 'w-[110%] h-[110%] object-contain'} transform group-hover:scale-105 transition-transform duration-700`}
+                          className="w-full h-full object-cover scale-110 transform group-hover:scale-105 transition-transform duration-700"
                           priority={index < 3}
                           onError={(e) => {
                             // Fallback to logo if image not found

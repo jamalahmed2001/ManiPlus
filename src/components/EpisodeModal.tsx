@@ -13,12 +13,8 @@ interface EpisodeModalProps {
 export const EpisodeModal: React.FC<EpisodeModalProps> = ({ episode, isOpen, onClose, onPlay: _onPlay }) => {
   if (!episode || !isOpen) return null;
 
-  // Extract episode number from episodeNumber field (e.g., "EP 001" -> "1")
-  const episodeNumMatch = /\d+/.exec(episode.episodeNumber ?? '');
-  const episodeNumber = episodeNumMatch ? parseInt(episodeNumMatch[0], 10).toString() : '1';
-  // Use .jpeg for episode 1, .png for all others
-  const imageExtension = episodeNumber === '1' ? 'jpeg' : 'png';
-  const podcastImage = `/podcasts/${episodeNumber}.${imageExtension}`;
+  // All episodes share the unified Mani+ "Beating Edge" cover.
+  const podcastImage = `/podcasts/1.webp`;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
@@ -60,7 +56,7 @@ export const EpisodeModal: React.FC<EpisodeModalProps> = ({ episode, isOpen, onC
               alt={episode.title}
               width={400}
               height={400}
-              className={episodeNumber === '1' ? 'w-full h-full object-cover scale-110' : 'w-[110%] h-[110%] object-contain'}
+              className="w-full h-full object-cover scale-110"
               onError={(e) => {
                 e.currentTarget.src = '/mani+logo.png';
                 e.currentTarget.className = 'w-full h-full object-contain p-12';
